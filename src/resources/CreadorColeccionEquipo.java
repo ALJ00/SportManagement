@@ -62,27 +62,27 @@ public class CreadorColeccionEquipo {
         Text text1 = document.createTextNode(equipo.getNombre()); //damos valor
         nombre.appendChild(text1);
 
-        // creo el elemento apellido
-        Element apellido = document.createElement("entrenador");
+        // creo el elemento entrenador
+        Element entre = document.createElement("entrenador");
         Text text2 = document.createTextNode(equipo.getEntrenador()); //damos valor
-        apellido.appendChild(text2);
+        entre.appendChild(text2);
 
-        // creo el elemento tfno
-        Element tfno = document.createElement("categoria");
+        // creo el elemento categ
+        Element cat = document.createElement("categoria");
         Text text3 = document.createTextNode(equipo.getCategoria()); //damos valor
-        tfno.appendChild(text3);
+        cat.appendChild(text3);
 
-        // creo el elemento fechanac
-        Element fechanac = document.createElement("campoentrenamiento");
+        // creo el elemento campo
+        Element campo = document.createElement("campoentrenamiento");
         Text text4 = document.createTextNode(equipo.getCampoEntrenamiento()); //damos valor
-        fechanac.appendChild(text4);
+        campo.appendChild(text4);
 
 
         // Añado los hijos al elemeto padre item
         itemElemento.appendChild(nombre);
-        itemElemento.appendChild(apellido);
-        itemElemento.appendChild(tfno);
-        itemElemento.appendChild(fechanac);
+        itemElemento.appendChild(entre);
+        itemElemento.appendChild(cat);
+        itemElemento.appendChild(campo);
 
 
         // añado a la raiz del documento el elemento item con sus correspondientes hijos

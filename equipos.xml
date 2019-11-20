@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Equipos>
+    <Equipo codigoequipo="A">
+        <nombre>AlevínA</nombre>
+        <entrenador>Jose</entrenador>
+        <categoria>Alevín</categoria>
+        <campoentrenamiento>Astrónomos</campoentrenamiento>
+    </Equipo>
+</Equipos>

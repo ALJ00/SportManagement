@@ -64,7 +64,7 @@ public class AppWindow {
                 if (comprobarTextFieldsJugador(dni, cod, name, ap, tfno, fnac, de, s)) {
 
 
-                    Jugador jugador = new Jugador(dni, cod, ap, ap, tfno, fnac, de, s);
+                    Jugador jugador = new Jugador(dni, cod, name, ap, tfno, fnac, de, s);
 
                     try {
                         CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador);
@@ -99,7 +99,7 @@ public class AppWindow {
             public void actionPerformed(ActionEvent e) {
 
                 String cod = textFieldCodEq.getText();
-                String name = textFieldNombreJug.getText();
+                String name = textFieldNombreEquip.getText();
                 String entre = textFieldEntrenEquip.getText();
                 String cat = textFieldCategEquip.getText();
                 String campo = textFieldCampoEntreEquip.getText();
@@ -124,7 +124,7 @@ public class AppWindow {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
 
-                    JOptionPane.showMessageDialog(null, "Insertado nuevo jugador");
+                    JOptionPane.showMessageDialog(null, "Insertado nuevo equipo");
 
                 } else {
 
@@ -132,7 +132,7 @@ public class AppWindow {
 
                 }
 
-                limpiarTextFieldsJugador();
+                limpiarTextFieldsEquipo();
 
             }
         });
