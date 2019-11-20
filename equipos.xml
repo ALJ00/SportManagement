@@ -6,4 +6,10 @@
         <categoria>Alevín</categoria>
         <campoentrenamiento>Astrónomos</campoentrenamiento>
     </Equipo>
+    <Equipo codigoequipo="I">
+        <nombre>InfantilA</nombre>
+        <entrenador>Jose</entrenador>
+        <categoria>Infantil</categoria>
+        <campoentrenamiento>Betoño</campoentrenamiento>
+    </Equipo>
 </Equipos>
