@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="exist-xqj-1.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/Conectores XMLDB y XQJ/ConectoresXQJ/exist-xqj-1.0.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Conectores XMLDB y XQJ/ConectoresXQJ/xqj2-0.0.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Conectores XMLDB y XQJ/ConectoresXQJ/xqjapi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
