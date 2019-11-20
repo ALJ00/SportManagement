@@ -1,7 +1,9 @@
 package vista;
 
+import modelo.Equipo;
 import modelo.Jugador;
 import org.xml.sax.SAXException;
+import resources.CreadorColeccionEquipo;
 import resources.CreadorColeccionJugador;
 
 import javax.swing.*;
@@ -68,15 +70,15 @@ public class AppWindow {
                         CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador);
                     } catch (ParserConfigurationException ex) {
                         ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null,  ex.getMessage());
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     } catch (TransformerException ex) {
-                        JOptionPane.showMessageDialog(null,  ex.getMessage());
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     } catch (IOException ex) {
                         ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null,  ex.getMessage());
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     } catch (SAXException ex) {
                         ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null,  ex.getMessage());
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
 
                     JOptionPane.showMessageDialog(null, "Insertado nuevo jugador");
@@ -89,6 +91,48 @@ public class AppWindow {
 
                 limpiarTextFieldsJugador();
 
+
+            }
+        });
+        altaButtonEquipo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String cod = textFieldCodEq.getText();
+                String name = textFieldNombreJug.getText();
+                String entre = textFieldEntrenEquip.getText();
+                String cat = textFieldCategEquip.getText();
+                String campo = textFieldCampoEntreEquip.getText();
+
+                if (comprobarTextFieldsEquipo(cod, name, entre, cat, campo)) {
+
+
+                    Equipo equipo = new Equipo(cod, name, entre, cat, campo);
+
+                    try {
+                        CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo);
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    } catch (TransformerException ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }
+
+                    JOptionPane.showMessageDialog(null, "Insertado nuevo jugador");
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Introduce todos lo campos");
+
+                }
+
+                limpiarTextFieldsJugador();
 
             }
         });
