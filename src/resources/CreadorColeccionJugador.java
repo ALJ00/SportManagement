@@ -80,7 +80,7 @@ public class CreadorColeccionJugador {
         // creo el elemento demarcacion
         Element demarcacion = document.createElement("demarcacion");
         Text text5 = document.createTextNode(jugador.getDemarcacion()); //damos valor
-        fechanac.appendChild(text5);
+        demarcacion.appendChild(text5);
 
 
         // creo el elemento salario

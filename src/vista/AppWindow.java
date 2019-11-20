@@ -1,6 +1,15 @@
 package vista;
 
+import modelo.Jugador;
+import org.xml.sax.SAXException;
+import resources.CreadorColeccionJugador;
+
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class AppWindow {
     private JPanel contenedorPrincipal;
@@ -27,13 +36,62 @@ public class AppWindow {
     private JTextField textFieldCampoEntreEquip;
     private JPanel conetendorConsultasAvanzadas;
     private JTable table1;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    private JButton buttonNuevoJugadorCrud;
+    private JButton eliminarButtonCrudJugador;
+    private JButton buttonActualizarCrudJugador;
     private static JFrame frame;
 
 
     public AppWindow() {
+
+
+        altaButtonJugador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String dni = textFieldDniJug.getText();
+                String cod = textFieldCodEquJug.getText();
+                String name = textFieldNombreJug.getText();
+                String ap = textFieldApelliJug.getText();
+                String tfno = textFieldTfnoJug.getText();
+                String fnac = textFieldFchaNacJug.getText();
+                String de = textFieldDemarcJug.getText();
+                String s = textFieldSalarJug.getText();
+
+
+                if (comprobarTextFieldsJugador(dni, cod, name, ap, tfno, fnac, de, s)) {
+
+
+                    Jugador jugador = new Jugador(dni, cod, ap, ap, tfno, fnac, de, s);
+
+                    try {
+                        CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador);
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null,  ex.getMessage());
+                    } catch (TransformerException ex) {
+                        JOptionPane.showMessageDialog(null,  ex.getMessage());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null,  ex.getMessage());
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null,  ex.getMessage());
+                    }
+
+                    JOptionPane.showMessageDialog(null, "Insertado nuevo jugador");
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Introduce todos lo campos");
+
+                }
+
+                limpiarTextFieldsJugador();
+
+
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -44,5 +102,60 @@ public class AppWindow {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+
+    public boolean comprobarTextFieldsJugador(String d, String cod, String n, String ap, String tfno, String fnac, String demarc, String sala) {
+
+        boolean respuesta = false;
+
+        if (n.equals("") || d.equals("") || ap.equals("") || tfno.equals("") || fnac.equals("") || demarc.equals("")
+                || sala.equals("") || cod.equals("")) {
+
+
+            respuesta = false;
+        } else {
+            respuesta = true;
+        }
+
+        return respuesta;
+
+    }
+
+    public boolean comprobarTextFieldsEquipo(String cod, String n, String entr, String cat, String cpentre) {
+
+        boolean respuesta = false;
+
+        if (n.equals("") || cod.equals("") || entr.equals("") || cat.equals("") || cpentre.equals("")) {
+
+
+            respuesta = false;
+        } else {
+            respuesta = true;
+        }
+
+        return respuesta;
+
+    }
+
+    public void limpiarTextFieldsJugador() {
+        textFieldNombreJug.setText("");
+        textFieldDniJug.setText("");
+        textFieldApelliJug.setText("");
+        textFieldDemarcJug.setText("");
+        textFieldFchaNacJug.setText("");
+        textFieldCodEquJug.setText("");
+        textFieldSalarJug.setText("");
+        textFieldTfnoJug.setText("");
+
+    }
+
+    public void limpiarTextFieldsEquipo() {
+        textFieldCodEq.setText("");
+        textFieldNombreEquip.setText("");
+        textFieldEntrenEquip.setText("");
+        textFieldCategEquip.setText("");
+        textFieldCampoEntreEquip.setText("");
+
     }
 }
