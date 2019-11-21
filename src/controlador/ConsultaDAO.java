@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.Jugador;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -15,6 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ConsultaDAO {
 
@@ -93,7 +95,9 @@ public class ConsultaDAO {
     }
 
     // metod to get Xml data with Dom
-    public static void listarJugadoresDom() throws ParserConfigurationException, IOException, SAXException {
+    public static ArrayList<Jugador> listarJugadoresDom() throws ParserConfigurationException, IOException, SAXException {
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
 
         //Get Document Builder
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -121,6 +125,14 @@ public class ConsultaDAO {
             {
                 //Print each player´s detail
                 Element eElement = (Element) node;
+
+                String dni = eElement.getAttribute("dni");
+                String nombre = eElement.getElementsByTagName("nombre").item(0).getTextContent();
+
+                //Jugador nuevoJugador = new Jugador();
+
+
+
                 System.out.println("Jugador dni: "    + eElement.getAttribute("dni"));
                 System.out.println("Codigo equipo jgador: "    + eElement.getAttribute("codigoequipo"));
                 System.out.println("Nombre : "  + eElement.getElementsByTagName("nombre").item(0).getTextContent());
@@ -130,6 +142,8 @@ public class ConsultaDAO {
                 System.out.println("Salario : "    + eElement.getElementsByTagName("salario").item(0).getTextContent());
             }
         }
+
+        return jugadores;
     }
 
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
