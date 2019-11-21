@@ -8,4 +8,20 @@
         <demarcacion>Delantero</demarcacion>
         <salario>1200</salario>
     </Jugador>
+    <Jugador codigoequipo="A" dni="44686144L">
+        <nombre>Jose</nombre>
+        <apellido>Armas</apellido>
+        <telefono>660058538</telefono>
+        <fechanacimiento>04/02/1980</fechanacimiento>
+        <demarcacion>Delantero</demarcacion>
+        <salario>1200</salario>
+    </Jugador>
+    <Jugador codigoequipo="A" dni="44686144C">
+        <nombre>Peio</nombre>
+        <apellido>Pérez</apellido>
+        <telefono>663258537</telefono>
+        <fechanacimiento>04/02/1980</fechanacimiento>
+        <demarcacion>Delantero</demarcacion>
+        <salario>1200</salario>
+    </Jugador>
 </Jugadores>

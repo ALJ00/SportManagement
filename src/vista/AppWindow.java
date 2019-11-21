@@ -1,5 +1,6 @@
 package vista;
 
+import controlador.ConsultaDAO;
 import modelo.Equipo;
 import modelo.Jugador;
 import org.xml.sax.SAXException;
@@ -37,16 +38,24 @@ public class AppWindow {
     private JTextField textFieldCategEquip;
     private JTextField textFieldCampoEntreEquip;
     private JPanel conetendorConsultasAvanzadas;
-    private JTable table1;
     private JButton buttonNuevoJugadorCrud;
     private JButton eliminarButtonCrudJugador;
     private JButton buttonActualizarCrudJugador;
+    private JPanel contenedorBotonesCrud;
+    private JScrollPane conetendorScroll;
+    private JTextArea textArea;
+    private JButton buttonListarJugadores;
+    private JPanel contenedorTablaJugadores;
+    private JScrollPane scrollPaneTablaJugadores;
+    private JTable tablaJugadores;
     private static JFrame frame;
 
 
     public AppWindow() {
 
 
+
+        // listeners buttons
         altaButtonJugador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,16 +145,27 @@ public class AppWindow {
 
             }
         });
+        buttonListarJugadores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsultaDAO.conectar();
+
+                ConsultaDAO.listarJugadores(textArea);
+            }
+        });
     }
 
     public static void main(String[] args) {
         frame = new JFrame("App Sport Management");
         frame.setContentPane(new AppWindow().contenedorPrincipal);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+
+
     }
 
 

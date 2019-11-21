@@ -1,8 +1,20 @@
 package controlador;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XPathQueryService;
+
+import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
 
 public class ConsultaDAO {
 
@@ -41,13 +53,19 @@ public class ConsultaDAO {
     }
 
     // metodo para listarJugadores
-    private static void listarJugadores(){
+    public static void listarJugadores(JTextArea textArea){
         if (conectar() != null) {
             try {
+
+                //ResourceSet result = servicio.query("for $de in doc('file:///C:/Users/usuario/Desktop/test.xml')
+                // /departamentos/DEP_ROW return $de");
+
+
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
-                ResourceSet result = servicio.query("for $jugador in /Jugadores/Jugador return data($jugador)");
+                ResourceSet result = servicio.query("/Jugadores/Jugador");
 
+                long numeroNodos = result.getSize();
 
                 // recorrer los datos del recurso.
                 ResourceIterator i;
@@ -57,9 +75,10 @@ public class ConsultaDAO {
                 }
                 while (i.hasMoreResources()) {
                     Resource r = i.nextResource();
-                    Collection t = r.getParentCollection();
-
                     System.out.println("--------------------------------------------");
+                    textArea.append((String) r.getContent()+"\n");
+
+
                     System.out.println((String) r.getContent());
                 }
                 col.close();
@@ -73,8 +92,48 @@ public class ConsultaDAO {
 
     }
 
-    public static void main(String[] args) {
-        ConsultaDAO.listarJugadores();
+    // metod to get Xml data with Dom
+    public static void listarJugadoresDom() throws ParserConfigurationException, IOException, SAXException {
+
+        //Get Document Builder
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        //Build Document
+        Document document = builder.parse(new File("jugadores.xml"));
+
+        //Normalize the XML Structure; It's just too important !!
+        document.getDocumentElement().normalize();
+
+        //Here comes the root node
+        Element root = document.getDocumentElement();
+        System.out.println(root.getNodeName());
+
+        //Get all players
+        NodeList nList = document.getElementsByTagName("Jugador");
+        System.out.println("============================");
+
+        for (int temp = 0; temp < nList.getLength(); temp++)
+        {
+            Node node = nList.item(temp);
+            System.out.println("");    //Just a separator
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+            {
+                //Print each player´s detail
+                Element eElement = (Element) node;
+                System.out.println("Jugador dni: "    + eElement.getAttribute("dni"));
+                System.out.println("Codigo equipo jgador: "    + eElement.getAttribute("codigoequipo"));
+                System.out.println("Nombre : "  + eElement.getElementsByTagName("nombre").item(0).getTextContent());
+                System.out.println("Apellido : "  + eElement.getElementsByTagName("apellido").item(0).getTextContent());
+                System.out.println("Teléfono : "   + eElement.getElementsByTagName("telefono").item(0).getTextContent());
+                System.out.println("Demarcación : "    + eElement.getElementsByTagName("demarcacion").item(0).getTextContent());
+                System.out.println("Salario : "    + eElement.getElementsByTagName("salario").item(0).getTextContent());
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+        ConsultaDAO.listarJugadoresDom();
     }
 
 
