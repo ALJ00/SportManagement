@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ModeloTablaJugadores extends AbstractTableModel {
 
     private ArrayList<Jugador> jugadores = new ArrayList();
-    private String[] columnas = {"Dni","Código equipo","Nombre","Apellido","Teléfono","Fecha Nacimeinto","Demarcación","Salario"};
+    private String[] columnas = {"Dni","Cod.Equ.","Nombre","Apellido","Telf","Fecha Nac.","Puesto","Salario"};
 
     public ModeloTablaJugadores() {
     }

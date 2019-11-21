@@ -3,6 +3,7 @@ package vista;
 import controlador.ConsultaDAO;
 import modelo.Equipo;
 import modelo.Jugador;
+import modelo.ModeloTablaJugadores;
 import org.xml.sax.SAXException;
 import resources.CreadorColeccionEquipo;
 import resources.CreadorColeccionJugador;
@@ -10,6 +11,7 @@ import resources.CreadorColeccionJugador;
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -42,18 +44,22 @@ public class AppWindow {
     private JButton eliminarButtonCrudJugador;
     private JButton buttonActualizarCrudJugador;
     private JPanel contenedorBotonesCrud;
-    private JScrollPane conetendorScroll;
+    private JScrollPane conetendorScrollTextArea;
     private JTextArea textArea;
     private JButton buttonListarJugadores;
     private JPanel contenedorTablaJugadores;
     private JScrollPane scrollPaneTablaJugadores;
     private JTable tablaJugadores;
+    private JPanel contenedorGestionJugadores;
     private static JFrame frame;
+    private ModeloTablaJugadores modeloTablaJugadores;
 
 
-    public AppWindow() {
+    public AppWindow() throws IOException, SAXException, ParserConfigurationException {
 
-
+        tablaJugadores.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 9));
+        modeloTablaJugadores = new ModeloTablaJugadores(ConsultaDAO.listarJugadoresDom());
+        tablaJugadores.setModel(modeloTablaJugadores);
 
         // listeners buttons
         altaButtonJugador.addActionListener(new ActionListener() {
@@ -155,7 +161,7 @@ public class AppWindow {
         });
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         frame = new JFrame("App Sport Management");
         frame.setContentPane(new AppWindow().contenedorPrincipal);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

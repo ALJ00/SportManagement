@@ -127,17 +127,23 @@ public class ConsultaDAO {
                 Element eElement = (Element) node;
 
                 String dni = eElement.getAttribute("dni");
+                String cod = eElement.getAttribute("codigoequipo");
                 String nombre = eElement.getElementsByTagName("nombre").item(0).getTextContent();
+                String ape = eElement.getElementsByTagName("apellido").item(0).getTextContent();
+                String tfno = eElement.getElementsByTagName("telefono").item(0).getTextContent();
+                String fnac = eElement.getElementsByTagName("fechanacimiento").item(0).getTextContent();
+                String demar = eElement.getElementsByTagName("demarcacion").item(0).getTextContent();
+                String sal = eElement.getElementsByTagName("salario").item(0).getTextContent();
 
-                //Jugador nuevoJugador = new Jugador();
-
-
+                Jugador nuevoJugador = new Jugador(dni,cod,nombre,ape,tfno,fnac,demar,sal);
+                jugadores.add(nuevoJugador);
 
                 System.out.println("Jugador dni: "    + eElement.getAttribute("dni"));
                 System.out.println("Codigo equipo jgador: "    + eElement.getAttribute("codigoequipo"));
                 System.out.println("Nombre : "  + eElement.getElementsByTagName("nombre").item(0).getTextContent());
                 System.out.println("Apellido : "  + eElement.getElementsByTagName("apellido").item(0).getTextContent());
                 System.out.println("Teléfono : "   + eElement.getElementsByTagName("telefono").item(0).getTextContent());
+                System.out.println("Fecha Nacimiento : "   + eElement.getElementsByTagName("fechanacimiento").item(0).getTextContent());
                 System.out.println("Demarcación : "    + eElement.getElementsByTagName("demarcacion").item(0).getTextContent());
                 System.out.println("Salario : "    + eElement.getElementsByTagName("salario").item(0).getTextContent());
             }
