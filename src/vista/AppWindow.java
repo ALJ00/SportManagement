@@ -18,10 +18,10 @@ import java.io.IOException;
 
 public class AppWindow {
     private JPanel contenedorPrincipal;
-    private JPanel contenedorGestionAlta;
-    private JPanel conetenedorCrudEquipos;
+    private JPanel contenedorGestionEquipos;
+    private JPanel conetenedorGestionJugadores;
     private JPanel contenedorJugadores;
-    private JPanel conetendorEquipos;
+    private JPanel conetendorDatosEquipos;
     private JButton buttonAutomaticJug;
     private JButton altaButtonJugador;
     private JTextField textFieldDniJug;
@@ -39,8 +39,6 @@ public class AppWindow {
     private JTextField textFieldEntrenEquip;
     private JTextField textFieldCategEquip;
     private JTextField textFieldCampoEntreEquip;
-    private JPanel conetendorConsultasAvanzadas;
-    private JButton buttonNuevoJugadorCrud;
     private JButton eliminarButtonCrudJugador;
     private JButton buttonActualizarCrudJugador;
     private JPanel contenedorBotonesCrud;
@@ -50,7 +48,22 @@ public class AppWindow {
     private JPanel contenedorTablaJugadores;
     private JScrollPane scrollPaneTablaJugadores;
     private JTable tablaJugadores;
-    private JPanel contenedorGestionJugadores;
+    private JPanel contenedorTablaTextAreaJugadores;
+    private JPanel conetendorGestAvanzJugadores;
+    private JPanel conetenedorLabelsTexfGestAvanzJugadores;
+    private JPanel conetendorDatosJugadores;
+    private JPanel contendorTablaTextAreaEquipos;
+    private JPanel contenedorTablaEquipos;
+    private JScrollPane conetenedorScrollTextAreaEquipos;
+    private JPanel conetenedoCrudBotonesEquipos;
+    private JTextArea textAreaEquipos;
+    private JScrollPane scrollPaneEquipos;
+    private JTable tabalEquipos;
+    private JPanel conetendorEquiposTexfIeldsLabelsGestAvanz;
+    private JPanel contenedorGestAvanzEquipos;
+    private JButton listarEquiposButton;
+    private JButton eliminarButton;
+    private JButton actualizarButton;
     private static JFrame frame;
     private ModeloTablaJugadores modeloTablaJugadores;
 
