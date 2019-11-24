@@ -79,7 +79,6 @@ public class AppWindow {
     private ModeloTablaJugadores modeloTablaJugadores;
     private ModeloTablaEquipos modeloTablaEquipos;
 
-
     public AppWindow() throws IOException, SAXException, ParserConfigurationException {
 
         tablaJugadores.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 10));
@@ -89,6 +88,10 @@ public class AppWindow {
         tabalEquipos.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 10));
         modeloTablaEquipos = new ModeloTablaEquipos(ConsultaDAO.listarEquiposDom());
         tabalEquipos.setModel(modeloTablaEquipos);
+
+        ConsultaDAO.conectar();
+        ConsultaDAO.listarEquipos(textAreaEquipos);
+        ConsultaDAO.listarJugadores(textArea);
 
         // listeners buttons
         altaButtonJugador.addActionListener(new ActionListener() {
@@ -184,7 +187,6 @@ public class AppWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ConsultaDAO.conectar();
-
                 ConsultaDAO.listarJugadores(textArea);
             }
         });
@@ -202,7 +204,6 @@ public class AppWindow {
 
 
     }
-
 
     public boolean comprobarTextFieldsJugador(String d, String cod, String n, String ap, String tfno, String fnac, String demarc, String sala) {
 

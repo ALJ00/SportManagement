@@ -95,7 +95,38 @@ public class ConsultaDAO {
 
     // metodo para listarEquipos
     public static void listarEquipos(JTextArea textArea){
+        if (conectar() != null) {
+            try {
 
+                //ResourceSet result = servicio.query("for $de in doc('file:///C:/Users/usuario/Desktop/test.xml')
+                // /departamentos/DEP_ROW return $de");
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                ResourceSet result = servicio.query("/Equipos/Equipo");
+
+                // recorrer los datos del recurso.
+                ResourceIterator i;
+                i = result.getIterator();
+                if (!i.hasMoreResources()) {
+                    System.out.println(" LA CONSULTA NO DEVUELVE NADA O ESTÁ MAL ESCRITA");
+                }
+                while (i.hasMoreResources()) {
+                    Resource r = i.nextResource();
+                    System.out.println("--------------------------------------------");
+
+                    // añado contenido al textArea
+                    textArea.append((String) r.getContent()+"\n");
+
+                    System.out.println((String) r.getContent());
+                }
+                col.close();
+            } catch (XMLDBException e) {
+                System.out.println(" ERROR AL CONSULTAR DOCUMENTO.");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Error en la conexión. Comprueba datos.");
+        }
 
     }
 
@@ -151,7 +182,6 @@ public class ConsultaDAO {
 
         return equipos;
     }
-
 
     // metod to get Xml data with Dom
     public static ArrayList<Jugador> listarJugadoresDom() throws ParserConfigurationException, IOException, SAXException {
