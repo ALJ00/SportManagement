@@ -64,6 +64,16 @@ public class AppWindow {
     private JButton listarEquiposButton;
     private JButton eliminarButton;
     private JButton actualizarButton;
+    private JRadioButton equiposPorCódigoRadioButton;
+    private JRadioButton equiposPorNombreRadioButton;
+    private JRadioButton equiposPorCategoríaRadioButton;
+    private JButton buttonBuscAvanEquip;
+    private JRadioButton jugadorPorDniRadioButton;
+    private JRadioButton jugadorPorNombreRadioButton;
+    private JRadioButton salario1000RadioButton;
+    private JRadioButton jugadorPorDemarcaciónRadioButton;
+    private JRadioButton jugadoresPorNombreEquipoRadioButton;
+    private JButton buttonBusqAvanzJugador;
     private static JFrame frame;
     private ModeloTablaJugadores modeloTablaJugadores;
 
