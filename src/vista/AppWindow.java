@@ -113,6 +113,8 @@ public class AppWindow {
 
                     Jugador jugador = new Jugador(dni, cod, name, ap, tfno, fnac, de, s);
 
+                    modeloTablaJugadores.adicionarJugador(jugador);
+
                     try {
                         CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador);
                     } catch (ParserConfigurationException ex) {
@@ -155,6 +157,9 @@ public class AppWindow {
 
 
                     Equipo equipo = new Equipo(cod, name, entre, cat, campo);
+
+                    modeloTablaEquipos.adicionarEquipo(equipo);
+
 
                     try {
                         CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo);

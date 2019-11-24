@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Equipos>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Equipos>
     <Equipo codigoequipo="A">
         <nombre>AlevínA</nombre>
         <entrenador>Jose</entrenador>
@@ -12,4 +11,4 @@
         <categoria>Infantil</categoria>
         <campoentrenamiento>Betoño</campoentrenamiento>
     </Equipo>
-</Equipos>
+<Equipo codigoequipo="A"><nombre>Betoño</nombre><entrenador>Peio</entrenador><categoria>Alevín</categoria><campoentrenamiento>Betoño</campoentrenamiento></Equipo><Equipo codigoequipo="J"><nombre>JuvenilA</nombre><entrenador>Oscar</entrenador><categoria>Juvenil</categoria><campoentrenamiento>Olarambe</campoentrenamiento></Equipo></Equipos>

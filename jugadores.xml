@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Jugadores>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Jugadores>
     <Jugador codigoequipo="A" dni="44686144L">
         <nombre>Armas</nombre>
         <apellido>Armas</apellido>
@@ -24,4 +23,4 @@
         <demarcacion>Delantero</demarcacion>
         <salario>1200</salario>
     </Jugador>
-</Jugadores>
+<Jugador codigoequipo="A" dni="74125896L"><nombre>Raul</nombre><apellido>Aldeano</apellido><telefono>789654125</telefono><fechanacimiento>01/01/1979</fechanacimiento><demarcacion>Defensa</demarcacion><salario>1200</salario></Jugador></Jugadores>

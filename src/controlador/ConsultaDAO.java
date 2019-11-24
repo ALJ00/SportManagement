@@ -102,7 +102,7 @@ public class ConsultaDAO {
                 // /departamentos/DEP_ROW return $de");
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
-                ResourceSet result = servicio.query("/Equipos/Equipo");
+                ResourceSet result = servicio.query("for $eq in doc('file:///C:/Users/armas/Desktop/SportManagement/equipos.xml') /Equipos/Equipo return $eq");
 
                 // recorrer los datos del recurso.
                 ResourceIterator i;
@@ -114,8 +114,13 @@ public class ConsultaDAO {
                     Resource r = i.nextResource();
                     System.out.println("--------------------------------------------");
 
+                    String unformattedXml = r.getContent().toString();
+
+                    String leastPrettifiedXml = unformattedXml.replaceAll("><", ">\n<");
+
+
                     // añado contenido al textArea
-                    textArea.append((String) r.getContent()+"\n");
+                    textArea.append(leastPrettifiedXml);
 
                     System.out.println((String) r.getContent());
                 }
