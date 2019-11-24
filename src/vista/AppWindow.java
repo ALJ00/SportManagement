@@ -160,6 +160,8 @@ public class AppWindow {
 
                     modeloTablaEquipos.adicionarEquipo(equipo);
 
+                    ConsultaDAO.insertarNuevoEquipo(equipo);
+
 
                     try {
                         CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo);

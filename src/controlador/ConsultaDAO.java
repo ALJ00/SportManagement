@@ -118,7 +118,6 @@ public class ConsultaDAO {
 
                     String leastPrettifiedXml = unformattedXml.replaceAll("><", ">\n<");
 
-
                     // añado contenido al textArea
                     textArea.append(leastPrettifiedXml);
 
@@ -245,6 +244,29 @@ public class ConsultaDAO {
 
         return jugadores;
     }
+
+    //insertar nuevo equipo
+    public static void insertarNuevoEquipo(Equipo e){
+        String nuevoequipo = "<Equipo codigoequipo="+e.getCodigoEquipo()+"><nombre>"+e.getNombre()+"</nombre><entrenador>"+e.getEntrenador()
+                +"</entrenador><categoria>"+e.getCategoria()+"</categoria><campoentrenamiento>"+e.getCampoEntrenamiento()+"</campoentrenamiento></Equipo>";
+
+        if (conectar() != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                System.out.printf("Inserto: %s \n", e.getNombre());
+                ResourceSet result = servicio.query("update insert " + nuevoequipo + " into /equipos");
+                col.close(); //borramos
+                System.out.println("Dep insertado.");
+            } catch (Exception ex) {
+                System.out.println("Error al insertar empleado.");
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Error en la conexión. Comprueba datos.");
+        }
+    }
+
+
 
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
         //ConsultaDAO.listarJugadoresDom();
