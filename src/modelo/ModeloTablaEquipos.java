@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ModeloTablaEquipos extends AbstractTableModel {
 
     private ArrayList<Equipo> equipos = new ArrayList();
-    private String[] columnas = {"Cod. equipo", "Nombre", "Entreandor", "Categoría", "Campo entrenamiento"};
+    private String[] columnas = {"Cod.Equipo", "Nombre", "Entrenador", "Categoría", "Campo Entre."};
 
     public ModeloTablaEquipos() {
     }

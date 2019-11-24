@@ -3,6 +3,7 @@ package vista;
 import controlador.ConsultaDAO;
 import modelo.Equipo;
 import modelo.Jugador;
+import modelo.ModeloTablaEquipos;
 import modelo.ModeloTablaJugadores;
 import org.xml.sax.SAXException;
 import resources.CreadorColeccionEquipo;
@@ -76,13 +77,18 @@ public class AppWindow {
     private JButton buttonBusqAvanzJugador;
     private static JFrame frame;
     private ModeloTablaJugadores modeloTablaJugadores;
+    private ModeloTablaEquipos modeloTablaEquipos;
 
 
     public AppWindow() throws IOException, SAXException, ParserConfigurationException {
 
-        tablaJugadores.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 9));
+        tablaJugadores.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 10));
         modeloTablaJugadores = new ModeloTablaJugadores(ConsultaDAO.listarJugadoresDom());
         tablaJugadores.setModel(modeloTablaJugadores);
+
+        tabalEquipos.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 10));
+        modeloTablaEquipos = new ModeloTablaEquipos(ConsultaDAO.listarEquiposDom());
+        tabalEquipos.setModel(modeloTablaEquipos);
 
         // listeners buttons
         altaButtonJugador.addActionListener(new ActionListener() {

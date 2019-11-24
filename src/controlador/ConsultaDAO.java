@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.Equipo;
 import modelo.Jugador;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -61,8 +62,6 @@ public class ConsultaDAO {
 
                 //ResourceSet result = servicio.query("for $de in doc('file:///C:/Users/usuario/Desktop/test.xml')
                 // /departamentos/DEP_ROW return $de");
-
-
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 ResourceSet result = servicio.query("/Jugadores/Jugador");
@@ -93,6 +92,66 @@ public class ConsultaDAO {
         }
 
     }
+
+    // metodo para listarEquipos
+    public static void listarEquipos(JTextArea textArea){
+
+
+    }
+
+    // metod to get Xml data with Dom
+    public static ArrayList<Equipo> listarEquiposDom() throws ParserConfigurationException, IOException, SAXException {
+
+        ArrayList<Equipo> equipos = new ArrayList<>();
+
+        //Get Document Builder
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        //Build Document
+        Document document = builder.parse(new File("equipos.xml"));
+
+        //Normalize the XML Structure; It's just too important !!
+        document.getDocumentElement().normalize();
+
+        //Here comes the root node
+        Element root = document.getDocumentElement();
+        System.out.println(root.getNodeName());
+
+        //Get all players
+        NodeList nList = document.getElementsByTagName("Equipo");
+        System.out.println("============================");
+
+        for (int temp = 0; temp < nList.getLength(); temp++)
+        {
+            Node node = nList.item(temp);
+            System.out.println("");    //Just a separator
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+            {
+                //Print each player´s detail
+                Element eElement = (Element) node;
+
+                String cod = eElement.getAttribute("codigoequipo");
+                String nombre = eElement.getElementsByTagName("nombre").item(0).getTextContent();
+                String ent = eElement.getElementsByTagName("entrenador").item(0).getTextContent();
+                String cat = eElement.getElementsByTagName("categoria").item(0).getTextContent();
+                String campo = eElement.getElementsByTagName("campoentrenamiento").item(0).getTextContent();
+
+                Equipo nuevoEquipo = new Equipo(cod,nombre,ent,cat,campo);
+                equipos.add(nuevoEquipo);
+
+                System.out.println("Codigo equipo : "    + eElement.getAttribute("codigoequipo"));
+                System.out.println("Nombre : "  + eElement.getElementsByTagName("nombre").item(0).getTextContent());
+                System.out.println("Entrenador : "  + eElement.getElementsByTagName("entrenador").item(0).getTextContent());
+                System.out.println("Categoría : "   + eElement.getElementsByTagName("categoria").item(0).getTextContent());
+                System.out.println("Campo entrenamiento : "   + eElement.getElementsByTagName("campoentrenamiento").item(0).getTextContent());
+
+            }
+        }
+
+        return equipos;
+    }
+
 
     // metod to get Xml data with Dom
     public static ArrayList<Jugador> listarJugadoresDom() throws ParserConfigurationException, IOException, SAXException {
@@ -153,7 +212,8 @@ public class ConsultaDAO {
     }
 
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
-        ConsultaDAO.listarJugadoresDom();
+        //ConsultaDAO.listarJugadoresDom();
+        ConsultaDAO.listarEquiposDom();
     }
 
 
