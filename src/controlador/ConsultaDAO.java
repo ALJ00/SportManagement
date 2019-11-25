@@ -246,15 +246,18 @@ public class ConsultaDAO {
     }
 
     //insertar nuevo equipo
-    public static void insertarNuevoEquipo(Equipo e){
+    public static void insertarNuevoEquipo(Equipo e, JTextArea textArea){
         String nuevoequipo = "<Equipo codigoequipo="+e.getCodigoEquipo()+"><nombre>"+e.getNombre()+"</nombre><entrenador>"+e.getEntrenador()
                 +"</entrenador><categoria>"+e.getCategoria()+"</categoria><campoentrenamiento>"+e.getCampoEntrenamiento()+"</campoentrenamiento></Equipo>";
 
         if (conectar() != null) {
             try {
+
+                //"for $eq in doc('file:///C:/Users/armas/Desktop/SportManagement/equipos.xml') /Equipos/Equipo return $eq"
+
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 System.out.printf("Inserto: %s \n", e.getNombre());
-                ResourceSet result = servicio.query("update insert " + nuevoequipo + " into /equipos");
+                ResourceSet result = servicio.query("update insert " + nuevoequipo + " into /Equipos");
                 col.close(); //borramos
                 System.out.println("Dep insertado.");
             } catch (Exception ex) {

@@ -160,7 +160,7 @@ public class AppWindow {
 
                     modeloTablaEquipos.adicionarEquipo(equipo);
 
-                    ConsultaDAO.insertarNuevoEquipo(equipo);
+                    ConsultaDAO.insertarNuevoEquipo(equipo,textAreaEquipos);
 
 
                     try {

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Equipos>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Equipos>
     <Equipo codigoequipo="A">
         <nombre>AlevínA</nombre>
         <entrenador>Jose</entrenador>
@@ -11,4 +12,46 @@
         <categoria>Infantil</categoria>
         <campoentrenamiento>Betoño</campoentrenamiento>
     </Equipo>
-<Equipo codigoequipo="A"><nombre>Betoño</nombre><entrenador>Peio</entrenador><categoria>Alevín</categoria><campoentrenamiento>Betoño</campoentrenamiento></Equipo><Equipo codigoequipo="J"><nombre>JuvenilA</nombre><entrenador>Oscar</entrenador><categoria>Juvenil</categoria><campoentrenamiento>Olarambe</campoentrenamiento></Equipo><Equipo codigoequipo="C"><nombre>CadeteA</nombre><entrenador>Odei</entrenador><categoria>Cadete</categoria><campoentrenamiento>Olarambe</campoentrenamiento></Equipo><Equipo codigoequipo="C"><nombre>CadeteB</nombre><entrenador>Ramón</entrenador><categoria>Cadete</categoria><campoentrenamiento>Olarambe</campoentrenamiento></Equipo></Equipos>
+    <Equipo codigoequipo="A">
+        <nombre>Betoño</nombre>
+        <entrenador>Peio</entrenador>
+        <categoria>Alevín</categoria>
+        <campoentrenamiento>Betoño</campoentrenamiento>
+    </Equipo>
+    <Equipo codigoequipo="J">
+        <nombre>JuvenilA</nombre>
+        <entrenador>Oscar</entrenador>
+        <categoria>Juvenil</categoria>
+        <campoentrenamiento>Olarambe</campoentrenamiento>
+    </Equipo>
+    <Equipo codigoequipo="C">
+        <nombre>CadeteA</nombre>
+        <entrenador>Odei</entrenador>
+        <categoria>Cadete</categoria>
+        <campoentrenamiento>Olarambe</campoentrenamiento>
+    </Equipo>
+    <Equipo codigoequipo="C">
+        <nombre>CadeteB</nombre>
+        <entrenador>Ramón</entrenador>
+        <categoria>Cadete</categoria>
+        <campoentrenamiento>Olarambe</campoentrenamiento>
+    </Equipo>
+    <Equipo codigoequipo="C">
+        <nombre>CadeteC</nombre>
+        <entrenador>Braulio</entrenador>
+        <categoria>Cadete</categoria>
+        <campoentrenamiento>Olarambe</campoentrenamiento>
+    </Equipo>
+    <Equipo codigoequipo="J">
+        <nombre>JuvenilC</nombre>
+        <entrenador>Oscar</entrenador>
+        <categoria>Juvenil</categoria>
+        <campoentrenamiento>Olarambe</campoentrenamiento>
+    </Equipo>
+    <Equipo codigoequipo="J">
+        <nombre>JuvenilB</nombre>
+        <entrenador>Aritz</entrenador>
+        <categoria>Juvenil</categoria>
+        <campoentrenamiento>Olarambe</campoentrenamiento>
+    </Equipo>
+</Equipos>
