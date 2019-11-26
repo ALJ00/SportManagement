@@ -52,7 +52,7 @@ public class CreadorColeccionEquipo {
         Element raiz = document.getDocumentElement(); //nodo jugador
 
 
-        // Creo los items Jugador y sus atributos
+        // Creo los items Equipo y sus atributos
         Element itemElemento = document.createElement("Equipo");
         itemElemento.setAttribute("codigoequipo", equipo.getCodigoEquipo());
 
