@@ -15,6 +15,7 @@ import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 public class AppWindow {
@@ -98,11 +99,45 @@ public class AppWindow {
 
                 if (comprobarTextFieldsJugador(dni, cod, name, ap, tfno, fnac, de, s)) {
 
+                    Jugador jugador = new Jugador(dni, cod, name, ap, tfno, fnac, de, s);
+
                     try {
 
-                        Jugador jugador = new Jugador(dni, cod, name, ap, tfno, fnac, de, s);
-                        modeloTablaJugadores.adicionarJugador(jugador);
-                        CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador);
+                        File file = new File("jugadores.xml");
+
+                        // si el archivo no existe en la nueva creacion de un jugador creo la coleccion y por tanto el archivo
+                        if(!file.exists()){
+                            //inserto nuevo equipo en la coleccion local
+                            CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador);
+
+                            // inserto nuevo equipo en la coleccion de exists
+                            ConsultaDAO.insertarNuevoJugador(jugador,textArea);
+
+                            // añado al table model un equipo para visualizarlo en la tabla
+                            modeloTablaJugadores.adicionarJugador(jugador);
+                            JOptionPane.showMessageDialog(null, "Insertado nuevo jugador");
+
+                        }else{
+
+                            // si existe el archivo compruebo si hay algun jugdor repetido
+                            if(ConsultaDAO.comprobarSiExisteJugador(jugador)){
+
+                                JOptionPane.showMessageDialog(null, "El jugador ya existe");
+
+                            }else {
+                                //inserto nuevo equipo en la coleccion local
+                                CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador);
+
+                                // inserto nuevo equipo en la coleccion de exists
+                                ConsultaDAO.insertarNuevoJugador(jugador,textArea);
+
+                                // añado al table model un equipo para visualizarlo en la tabla
+                                modeloTablaJugadores.adicionarJugador(jugador);
+                                JOptionPane.showMessageDialog(null, "Insertado nuevo jugador");
+
+                            }
+
+                        }
 
                     } catch (ParserConfigurationException ex) {
                         ex.printStackTrace();
@@ -144,14 +179,14 @@ public class AppWindow {
 
                     try {
                         Equipo equipo = new Equipo(cod, name, entre, cat, campo);
+                        File file = new File("equipos.xml");
 
-                        if(ConsultaDAO.comprobarSiExisteEquipo(equipo)){
+                        // si el archivo no existe ceo la coleccion y por tanto el nuevo equipo
+                        if(!file.exists()){
 
-                            JOptionPane.showMessageDialog(null, "El equipo ya existe");
-
-                        }else {
                             //inserto nuevo equipo en la coleccion local
                             CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo);
+
                             // inserto nuevo equipo en la coleccion de exists
                             ConsultaDAO.insertarNuevoEquipo(equipo,textAreaEquipos);
 
@@ -159,7 +194,32 @@ public class AppWindow {
                             modeloTablaEquipos.adicionarEquipo(equipo);
                             JOptionPane.showMessageDialog(null, "Insertado nuevo equipo");
 
+
+
+                        }else if(file.exists()){
+
+                            // si existe el archivo compruebo si hay equipos repetidos
+                            if(ConsultaDAO.comprobarSiExisteEquipo(equipo)){
+
+                                JOptionPane.showMessageDialog(null, "El equipo ya existe");
+
+                            }else {
+                                //inserto nuevo equipo en la coleccion local
+                                CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo);
+
+                                // inserto nuevo equipo en la coleccion de exists
+                                ConsultaDAO.insertarNuevoEquipo(equipo,textAreaEquipos);
+
+                                // añado al table model un equipo para visualizarlo en la tabla
+                                modeloTablaEquipos.adicionarEquipo(equipo);
+                                JOptionPane.showMessageDialog(null, "Insertado nuevo equipo");
+
+                            }
+
+
                         }
+
+
 
                     } catch (ParserConfigurationException ex) {
                         ex.printStackTrace();
@@ -222,6 +282,7 @@ public class AppWindow {
 
                     modeloTablaEquipos = new ModeloTablaEquipos(ConsultaDAO.listarEquiposDom());
                     tabalEquipos.setModel(modeloTablaEquipos);
+
                     ConsultaDAO.conectar();
                     ConsultaDAO.listarEquipos(textAreaEquipos);
 
@@ -341,8 +402,118 @@ public class AppWindow {
 
             }
         });
+        eliminarButtonCrudJugador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // selecciono la fila de la tabla seleccionada
+                int row = tablaJugadores.getSelectedRow();
+
+                if(row == -1){
+                    JOptionPane.showMessageDialog(null,"Seleccione una fila de la tabla jugadores");
+                }else{
+
+                    Jugador eq = new Jugador();
+                    eq.setDni(modeloTablaJugadores.getValueAt(row,0).toString());
+                    eq.setCodigoEquipo(modeloTablaJugadores.getValueAt(row,1).toString());
+                    eq.setNombre(modeloTablaJugadores.getValueAt(row,2).toString());
+                    eq.setApellido(modeloTablaJugadores.getValueAt(row,3).toString());
+                    eq.setTfno(modeloTablaJugadores.getValueAt(row,4).toString());
+                    eq.setFechaNacimiento(modeloTablaJugadores.getValueAt(row,5).toString());
+                    eq.setDemarcacion(modeloTablaJugadores.getValueAt(row,6).toString());
+                    eq.setSalario(modeloTablaJugadores.getValueAt(row,7).toString());
 
 
+                    try {
+                        if(!ConsultaDAO.eliminarJugadorDomXpath(eq)){
+                            JOptionPane.showMessageDialog(null,"Error, no se ha eliminado ningún jugador.");
+                        }else{
+
+                            //actualizo el table model
+                            modeloTablaJugadores.eliminarJugador(row);
+
+                            // actualizo el TextArea
+                            textArea.setText("");
+                            ConsultaDAO.conectar();
+                            ConsultaDAO.listarJugadores(textArea);
+
+                            JOptionPane.showMessageDialog(null,"Equipo eliminado correctamente.");
+                        }
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (TransformerException ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
+
+
+            }
+        });
+        buttonActualizarCrudJugador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Jugador eq;
+
+                if(!tablaJugadores.isEditing()){
+
+                    JOptionPane.showMessageDialog(null,"Seleccione una fila de la tabla jugadores");
+
+                }else{
+
+                    // selecciono la fila de la tabla seleccionada
+                    int row = tablaJugadores.getEditingRow();
+
+                    eq = new Jugador();
+                    eq.setDni(modeloTablaJugadores.getValueAt(row,0).toString());
+                    eq.setCodigoEquipo(modeloTablaJugadores.getValueAt(row,1).toString());
+                    eq.setNombre(modeloTablaJugadores.getValueAt(row,2).toString());
+                    eq.setApellido(modeloTablaJugadores.getValueAt(row,3).toString());
+                    eq.setTfno(modeloTablaJugadores.getValueAt(row,4).toString());
+                    eq.setFechaNacimiento(modeloTablaJugadores.getValueAt(row,5).toString());
+                    eq.setDemarcacion(modeloTablaJugadores.getValueAt(row,6).toString());
+                    eq.setSalario(modeloTablaJugadores.getValueAt(row,7).toString());
+
+
+                    try {
+                        if(!ConsultaDAO.modificarJugador(eq)){
+                            JOptionPane.showMessageDialog(null,"Error, no se ha actualizado ningún equipo.");
+                        }else{
+
+                            //actualizo el table model
+                            modeloTablaJugadores.setValueAt(eq.getDni(),row,0);
+                            modeloTablaJugadores.setValueAt(eq.getCodigoEquipo(),row,1);
+                            modeloTablaJugadores.setValueAt(eq.getNombre(),row,2);
+                            modeloTablaJugadores.setValueAt(eq.getApellido(),row,3);
+                            modeloTablaJugadores.setValueAt(eq.getTfno(),row,4);
+                            modeloTablaJugadores.setValueAt(eq.getFechaNacimiento(),row,5);
+                            modeloTablaJugadores.setValueAt(eq.getDemarcacion(),row,6);
+                            modeloTablaJugadores.setValueAt(eq.getSalario(),row,7);
+
+                            // actualizo el TextArea
+                            textArea.setText("");
+                            ConsultaDAO.conectar();
+                            ConsultaDAO.listarJugadores(textArea);
+
+                            JOptionPane.showMessageDialog(null,"Jugador actualizado correctamente.");
+                        }
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (TransformerException ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
+            }
+        });
     }
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {

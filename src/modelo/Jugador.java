@@ -27,6 +27,9 @@ public class Jugador {
         return dni;
     }
 
+    public Jugador() {
+    }
+
     public void setDni(String dni) {
         this.dni = dni;
     }

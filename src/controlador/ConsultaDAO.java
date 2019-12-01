@@ -165,7 +165,7 @@ public class ConsultaDAO {
     //insertar nuevo equipo
     public static void insertarNuevoEquipo(Equipo e, JTextArea textArea) {
 
-        String nuevoequipo = "<Equipo><codigoequipo>" + e.getCodigoEquipo() + "</codigoequipo><nombre>" + e.getNombre() + "</nombre><entrenador>" + e.getEntrenador()
+        String nuevoequipo = "<Equipo codigoequipo=" +"'"+ e.getCodigoEquipo()+"'" + " ><nombre>" + e.getNombre() + "</nombre><entrenador>" + e.getEntrenador()
                 + "</entrenador><categoria>" + e.getCategoria() + "</categoria><campoentrenamiento>" + e.getCampoEntrenamiento() + "</campoentrenamiento></Equipo>";
 
         System.out.println(nuevoequipo);
@@ -253,16 +253,15 @@ public class ConsultaDAO {
         for (int ix = 0; ix < items.getLength(); ix++) {
             Element element = (Element) items.item(ix);
             // elejir un elemento especifico por algun atributo
-            if (element.getAttribute("codigoequipo").equalsIgnoreCase(equipo.getCodigoEquipo())) {
-
+            if (element.getAttribute("codigoequipo").equalsIgnoreCase(equipo.getCodigoEquipo())){
                 System.out.println("El equipo ya existe");
 
                 respuesta = true;
 
-            } else {
-                respuesta = false;
-                System.out.println("Error no e ha eliminado nada");
             }
+
+
+
         }
 
 
@@ -318,7 +317,7 @@ public class ConsultaDAO {
 
     }
 
-    // **************** Consultas de jugadores ******************************************************
+    // **************** Consultas de jugadores ***************************************************************
 
     // metodo para listarJugadores
     public static void listarJugadores(JTextArea textArea) {
@@ -331,7 +330,8 @@ public class ConsultaDAO {
 
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
-                ResourceSet result = servicio.query("/Jugadores/Jugador");
+                ResourceSet result = servicio.query("for $eq in doc('file:///C:/Users/armas/Desktop/SportManagement/jugadores.xml') /Jugadores/Jugador return $eq");
+
 
                 long numeroNodos = result.getSize();
 
@@ -344,7 +344,12 @@ public class ConsultaDAO {
                 while (i.hasMoreResources()) {
                     Resource r = i.nextResource();
                     System.out.println("--------------------------------------------");
-                    textArea.append((String) r.getContent() + "\n");
+                    String unformattedXml = r.getContent().toString();
+
+                    String leastPrettifiedXml = unformattedXml.replaceAll("><", ">\n<");
+
+                    // añado contenido al textArea
+                    textArea.append(leastPrettifiedXml);
 
 
                     System.out.println((String) r.getContent());
@@ -424,6 +429,41 @@ public class ConsultaDAO {
         return jugadores;
     }
 
+    //insertar nuevo jugador
+    public static void insertarNuevoJugador(Jugador e, JTextArea textArea) {
+
+        String nuevoJugador = "<Jugador dni="+"'"+  e.getDni() +"'"+ " codigoequipo=" +"'"+ e.getCodigoEquipo()+"'" + "><nombre>" + e.getNombre()
+                + "</nombre><apellido>" + e.getApellido() + "</apellido><telefono>" + e.getTfno() + "</telefono><fechanacimiento>" + e.getFechaNacimiento() + "</fechanacimiento>" +
+                "<demarcacion>" + e.getDemarcacion() + "</demarcacion><salario>" + e.getSalario() + "</salario></Jugador>";
+
+        System.out.println(nuevoJugador);
+        if (conectar() != null) {
+            try {
+
+                //for $de in
+                //doc('file:///D:/XML/pruebaxquery/NUEVOS_DEP.xml')
+                ///NUEVOS_DEP/DEP_ROW
+                //return update insert $de into /departamentos
+
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                System.out.printf("Inserto: %s \n", e.getNombre());
+
+                ResourceSet result = servicio.query("update insert " + nuevoJugador + " into /Jugadores");
+                //"for $de in doc('file:///C:/Users/armas/Desktop/SportManagement/equipos.xml') /" + nuevoequipo + "return update insert $de into /Equipos"
+                String formateado = nuevoJugador.replaceAll("><", ">\n<");
+                textArea.append(formateado);
+                col.close(); //borramos
+
+                System.out.println("Jug insertado.");
+            } catch (Exception ex) {
+                System.out.println("Error al insertar jugador.");
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Error en la conexión. Comprueba datos.");
+        }
+    }
+
     // metodo que elimina un nodo del documento en funcion de su codigo
     public static boolean eliminarJugadorDomXpath(Jugador jugador) throws ParserConfigurationException,
             IOException, SAXException, TransformerException {
@@ -470,6 +510,8 @@ public class ConsultaDAO {
 
         boolean respuesta = false;
 
+
+
         // 1. cargar el XML original
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -483,7 +525,7 @@ public class ConsultaDAO {
             // elejir un elemento especifico por algun atributo
             if (element.getAttribute("dni").equalsIgnoreCase(jugador.getDni())) {
 
-                System.out.println("El juagdor ya existe");
+                System.out.println("El jugador ya existe");
 
                 respuesta = true;
 
@@ -500,7 +542,7 @@ public class ConsultaDAO {
     }
 
     // modificar un equipo
-    public static boolean modificarEquipo(Jugador jugador) throws ParserConfigurationException, IOException, SAXException, TransformerException {
+    public static boolean modificarJugador(Jugador jugador) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
         boolean respuesta = false;
 
@@ -517,23 +559,24 @@ public class ConsultaDAO {
             // elejir un elemento especifico por algun atributo
             if (element.getAttribute("dni").equalsIgnoreCase(jugador.getDni())) {
 
-
                 element.setAttribute("dni",jugador.getDni());
                 element.setAttribute("codigoequipo",jugador.getCodigoEquipo());
 
-                element.getElementsByTagName("nombre").item(0).setTextContent(equipo.getNombre());
-                element.getElementsByTagName("entrenador").item(0).setTextContent(equipo.getEntrenador());
-                element.getElementsByTagName("categoria").item(0).setTextContent(equipo.getCategoria());
-                element.getElementsByTagName("campoentrenamiento").item(0).setTextContent(equipo.getCampoEntrenamiento());
+                element.getElementsByTagName("nombre").item(0).setTextContent(jugador.getNombre());
+                element.getElementsByTagName("apellido").item(0).setTextContent(jugador.getApellido());
+                element.getElementsByTagName("telefono").item(0).setTextContent(jugador.getTfno());
+                element.getElementsByTagName("fechanacimiento").item(0).setTextContent(jugador.getFechaNacimiento());
+                element.getElementsByTagName("demarcacion").item(0).setTextContent(jugador.getDemarcacion());
+                element.getElementsByTagName("salario").item(0).setTextContent(jugador.getSalario());
 
 
                 // 3. Exportar nuevamente el XML
                 Transformer transformer = TransformerFactory.newInstance().newTransformer();
-                Result output = new StreamResult(new File("equipos.xml"));
+                Result output = new StreamResult(new File("jugadores.xml"));
                 Source input = new DOMSource(doc);
                 transformer.transform(input, output);
 
-                System.out.println("El equipo ha sido modificado correctamente");
+                System.out.println("El jugador ha sido modificado correctamente");
 
                 respuesta = true;
 

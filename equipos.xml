@@ -1,9 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Equipos>
-    <Equipo codigoequipo="a">
-        <nombre>AlevinB</nombre>
-        <entrenador>Ander</entrenador>
-        <categoria>Alevin</categoria>
-        <campoentrenamiento>Betoño</campoentrenamiento>
-    </Equipo>
-</Equipos>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Equipos><Equipo codigoequipo="a"><nombre>AlevinA</nombre><entrenador>Jose</entrenador><categoria>Alevin</categoria><campoentrenamiento>Betoño</campoentrenamiento></Equipo></Equipos>
