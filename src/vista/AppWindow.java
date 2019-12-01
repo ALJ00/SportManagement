@@ -63,8 +63,8 @@ public class AppWindow {
     private JPanel conetendorEquiposTexfIeldsLabelsGestAvanz;
     private JPanel contenedorGestAvanzEquipos;
     private JButton listarEquiposButton;
-    private JButton eliminarButton;
-    private JButton actualizarButton;
+    private JButton eliminarButtonEquipos;
+    private JButton actualizarButtonEquipos;
     private JRadioButton equiposPorCódigoRadioButton;
     private JRadioButton equiposPorNombreRadioButton;
     private JRadioButton equiposPorCategoríaRadioButton;
@@ -76,22 +76,10 @@ public class AppWindow {
     private JRadioButton jugadoresPorNombreEquipoRadioButton;
     private JButton buttonBusqAvanzJugador;
     private static JFrame frame;
-    private ModeloTablaJugadores modeloTablaJugadores;
-    private ModeloTablaEquipos modeloTablaEquipos;
+    private ModeloTablaJugadores modeloTablaJugadores = new ModeloTablaJugadores();
+    private ModeloTablaEquipos modeloTablaEquipos = new ModeloTablaEquipos();
 
     public AppWindow() throws IOException, SAXException, ParserConfigurationException {
-
-        tablaJugadores.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 10));
-        modeloTablaJugadores = new ModeloTablaJugadores(ConsultaDAO.listarJugadoresDom());
-        tablaJugadores.setModel(modeloTablaJugadores);
-
-        tabalEquipos.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 10));
-        modeloTablaEquipos = new ModeloTablaEquipos(ConsultaDAO.listarEquiposDom());
-        tabalEquipos.setModel(modeloTablaEquipos);
-
-        ConsultaDAO.conectar();
-        ConsultaDAO.listarEquipos(textAreaEquipos);
-        ConsultaDAO.listarJugadores(textArea);
 
         // listeners buttons
         altaButtonJugador.addActionListener(new ActionListener() {
@@ -110,13 +98,12 @@ public class AppWindow {
 
                 if (comprobarTextFieldsJugador(dni, cod, name, ap, tfno, fnac, de, s)) {
 
-
-                    Jugador jugador = new Jugador(dni, cod, name, ap, tfno, fnac, de, s);
-
-                    modeloTablaJugadores.adicionarJugador(jugador);
-
                     try {
+
+                        Jugador jugador = new Jugador(dni, cod, name, ap, tfno, fnac, de, s);
+                        modeloTablaJugadores.adicionarJugador(jugador);
                         CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador);
+
                     } catch (ParserConfigurationException ex) {
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -155,16 +142,25 @@ public class AppWindow {
 
                 if (comprobarTextFieldsEquipo(cod, name, entre, cat, campo)) {
 
-
-                    Equipo equipo = new Equipo(cod, name, entre, cat, campo);
-
-                    modeloTablaEquipos.adicionarEquipo(equipo);
-
-                    ConsultaDAO.insertarNuevoEquipo(equipo,textAreaEquipos);
-
-
                     try {
-                        CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo);
+                        Equipo equipo = new Equipo(cod, name, entre, cat, campo);
+
+                        if(ConsultaDAO.comprobarSiExisteEquipo(equipo)){
+
+                            JOptionPane.showMessageDialog(null, "El equipo ya existe");
+
+                        }else {
+                            //inserto nuevo equipo en la coleccion local
+                            CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo);
+                            // inserto nuevo equipo en la coleccion de exists
+                            ConsultaDAO.insertarNuevoEquipo(equipo,textAreaEquipos);
+
+                            // añado al table model un equipo para visualizarlo en la tabla
+                            modeloTablaEquipos.adicionarEquipo(equipo);
+                            JOptionPane.showMessageDialog(null, "Insertado nuevo equipo");
+
+                        }
+
                     } catch (ParserConfigurationException ex) {
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -178,7 +174,7 @@ public class AppWindow {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
 
-                    JOptionPane.showMessageDialog(null, "Insertado nuevo equipo");
+
 
                 } else {
 
@@ -193,10 +189,160 @@ public class AppWindow {
         buttonListarJugadores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ConsultaDAO.conectar();
-                ConsultaDAO.listarJugadores(textArea);
+
+
+                try {
+                    // tabla jugadores
+                    tablaJugadores.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 10));
+                    textArea.setText("");
+                    modeloTablaJugadores = new ModeloTablaJugadores(ConsultaDAO.listarJugadoresDom());
+                    tablaJugadores.setModel(modeloTablaJugadores);
+
+                    ConsultaDAO.conectar();
+                    ConsultaDAO.listarJugadores(textArea);
+
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                }
+
             }
         });
+        listarEquiposButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+
+                    // tabla equipos
+                    tabalEquipos.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 10));
+                    textAreaEquipos.setText("");
+
+                    modeloTablaEquipos = new ModeloTablaEquipos(ConsultaDAO.listarEquiposDom());
+                    tabalEquipos.setModel(modeloTablaEquipos);
+                    ConsultaDAO.conectar();
+                    ConsultaDAO.listarEquipos(textAreaEquipos);
+
+
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+        eliminarButtonEquipos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // selecciono la fila de la tabla seleccionada
+                int row = tabalEquipos.getSelectedRow();
+
+                if(row == -1){
+                    JOptionPane.showMessageDialog(null,"Seleccione una fila de la tabla equipos");
+                }else{
+
+                    Equipo eq = new Equipo();
+                    eq.setCodigoEquipo(modeloTablaEquipos.getValueAt(row,0).toString().toLowerCase());
+                    eq.setNombre(modeloTablaEquipos.getValueAt(row,1).toString());
+                    eq.setEntrenador(modeloTablaEquipos.getValueAt(row,2).toString());
+                    eq.setCategoria(modeloTablaEquipos.getValueAt(row,3).toString());
+                    eq.setCampoEntrenamiento(modeloTablaEquipos.getValueAt(row,4).toString());
+
+
+                    try {
+                        if(!ConsultaDAO.eliminarEquipoDomXpath(eq)){
+                            JOptionPane.showMessageDialog(null,"Error, no se ha eliminado ningún equipo.");
+                        }else{
+
+                            //actualizo el table model
+                            modeloTablaEquipos.eliminarEquipo(row);
+
+                            // actualizo el TextArea
+                            textAreaEquipos.setText("");
+                            ConsultaDAO.conectar();
+                            ConsultaDAO.listarEquipos(textAreaEquipos);
+
+                            JOptionPane.showMessageDialog(null,"Equipo eliminado correctamente.");
+                        }
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (TransformerException ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
+
+
+            }
+        });
+        actualizarButtonEquipos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Equipo eq;
+
+                if(!tabalEquipos.isEditing()){
+
+                    JOptionPane.showMessageDialog(null,"Seleccione una fila de la tabla equipos");
+
+                }else{
+
+                    // selecciono la fila de la tabla seleccionada
+                    int row = tabalEquipos.getEditingRow();
+
+                    eq = new Equipo();
+                    eq.setCodigoEquipo(modeloTablaEquipos.getValueAt(row,0).toString());
+                    eq.setNombre(modeloTablaEquipos.getValueAt(row,1).toString());
+                    eq.setEntrenador(modeloTablaEquipos.getValueAt(row,2).toString());
+                    eq.setCategoria(modeloTablaEquipos.getValueAt(row,3).toString());
+                    eq.setCampoEntrenamiento(modeloTablaEquipos.getValueAt(row,4).toString());
+
+
+                    try {
+                        if(!ConsultaDAO.modificarEquipo(eq)){
+                            JOptionPane.showMessageDialog(null,"Error, no se ha actualizado ningún equipo.");
+                        }else{
+
+                            //actualizo el table model
+                            modeloTablaEquipos.setValueAt(eq.getCodigoEquipo(),row,0);
+                            modeloTablaEquipos.setValueAt(eq.getNombre(),row,1);
+                            modeloTablaEquipos.setValueAt(eq.getEntrenador(),row,2);
+                            modeloTablaEquipos.setValueAt(eq.getCategoria(),row,3);
+                            modeloTablaEquipos.setValueAt(eq.getCampoEntrenamiento(),row,4);
+
+                            // actualizo el TextArea
+                            textAreaEquipos.setText("");
+                            ConsultaDAO.conectar();
+                            ConsultaDAO.listarEquipos(textAreaEquipos);
+
+                            JOptionPane.showMessageDialog(null,"Equipo actualizado correctamente.");
+                        }
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (TransformerException ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
+
+            }
+        });
+
+
     }
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
@@ -207,8 +353,6 @@ public class AppWindow {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
-
 
     }
 
@@ -235,7 +379,6 @@ public class AppWindow {
 
         if (n.equals("") || cod.equals("") || entr.equals("") || cat.equals("") || cpentre.equals("")) {
 
-
             respuesta = false;
         } else {
             respuesta = true;
@@ -254,7 +397,6 @@ public class AppWindow {
         textFieldCodEquJug.setText("");
         textFieldSalarJug.setText("");
         textFieldTfnoJug.setText("");
-
     }
 
     public void limpiarTextFieldsEquipo() {

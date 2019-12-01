@@ -16,6 +16,9 @@ public class Equipo {
         this.campoEntrenamiento = campoEntrenamiento;
     }
 
+    public Equipo() {
+    }
+
     public String getCodigoEquipo() {
         return codigoEquipo;
     }

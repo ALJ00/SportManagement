@@ -1,15 +1,16 @@
+import modelo.Equipo;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XPathQueryService;
 
 import java.util.Scanner;
 
-public class PruebasEmpleYDepart {
+public class Test {
 
     public static final String nombrefichero = "AleatorioEmple.dat";
     static Scanner teclado = new Scanner(System.in);
     static String driver = "org.exist.xmldb.DatabaseImpl"; //Driver para eXist
-    static String URI = "xmldb:exist://localhost:8083/exist/xmlrpc/db/ColeccionPruebas"; //URI colección
+    static String URI = "xmldb:exist://localhost:8083/exist/xmlrpc/db/Coleccionclub"; //URI colección
     static String usu = "admin"; //Usuario
     static String usuPwd = "12345Abcde"; //Clave
     static Collection col = null;
@@ -28,6 +29,8 @@ public class PruebasEmpleYDepart {
                 case 2:
                     //Inserta uno fijo
                     insertardep(21, "El 21","Talavera");
+                    Equipo e = new Equipo("j","j","j","j","j");
+                    insertarNuevoEquipo(e);
                     break;
                 case 3: // consultar un dep
                     System.out.println("Teclea el número de departamento a consultar: ");
@@ -132,6 +135,38 @@ public class PruebasEmpleYDepart {
             } catch (Exception e) {
                 System.out.println("Error al insertar empleado.");
                 e.printStackTrace();
+            }
+        } else {
+            System.out.println("Error en la conexión. Comprueba datos.");
+        }
+    }
+
+    public static void insertarNuevoEquipo(Equipo e){
+
+        String nuevoequipo = "<Equipo codigoequipo="+"'"+e.getCodigoEquipo()+"'"+"><nombre>"+e.getNombre()+"</nombre><entrenador>"+e.getEntrenador()
+                +"</entrenador><categoria>"+e.getCategoria()+"</categoria><campoentrenamiento>"+e.getCampoEntrenamiento()+"</campoentrenamiento></Equipo>";
+
+        System.out.println(nuevoequipo);
+        if (conectar() != null) {
+            try {
+
+                //for $de in
+                //doc('file:///D:/XML/pruebaxquery/NUEVOS_DEP.xml')
+                ///NUEVOS_DEP/DEP_ROW
+                //return update insert $de into /departamentos
+
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                System.out.printf("Inserto: %s \n", e.getNombre());
+                ResourceSet result = servicio.query("update insert " + nuevoequipo + " into /departamentos");
+
+                String formateado = nuevoequipo.replaceAll("><", ">\n<");
+
+                col.close(); //borramos
+
+                System.out.println("Dep insertado.");
+            } catch (Exception ex) {
+                System.out.println("Error al insertar empleado.");
+                ex.printStackTrace();
             }
         } else {
             System.out.println("Error en la conexión. Comprueba datos.");
@@ -243,8 +278,5 @@ public class PruebasEmpleYDepart {
         return false;
 
     }//
-
-
-
 
 }

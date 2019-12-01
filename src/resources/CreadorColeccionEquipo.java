@@ -51,11 +51,9 @@ public class CreadorColeccionEquipo {
         //Creo el nodo raiz del documento xml
         Element raiz = document.getDocumentElement(); //nodo jugador
 
-
-        // Creo los items Equipo y sus atributos
+        // Creo los items Equipo
         Element itemElemento = document.createElement("Equipo");
         itemElemento.setAttribute("codigoequipo", equipo.getCodigoEquipo());
-
 
         // Creo el elemento nombre
         Element nombre = document.createElement("nombre");
