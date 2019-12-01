@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Jugadores>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Jugadores>
 
-    
-<Jugador codigoequipo="A" dni="44686144L"><nombre>Gorka</nombre><apellido>Armas</apellido><telefono>660058538</telefono><fechanacimiento>04/02/1980</fechanacimiento><demarcacion>Delantero</demarcacion><salario>1200</salario></Jugador></Jugadores>
+
+    <Jugador codigoequipo="A" dni="44686144L">
+        <nombre>Gorka</nombre>
+        <apellido>Armas</apellido>
+        <telefono>660058538</telefono>
+        <fechanacimiento>04/02/1980</fechanacimiento>
+        <demarcacion>Delantero</demarcacion>
+        <salario>1200</salario>
+    </Jugador>
+</Jugadores>
