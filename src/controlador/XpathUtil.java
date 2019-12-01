@@ -32,11 +32,19 @@ public class XpathUtil {
         Object result = expr.evaluate(doc, XPathConstants.NODESET);
         NodeList nodes = (NodeList) result;
         for (int i = 0; i < nodes.getLength(); i++) {
-            System.out.println(nodes.item(i).getNodeValue());
+            System.out.println("Mas de 1000"+nodes.item(i).getNodeValue());
+        }
+
+        // obtener los jugadores por demarcacion
+        expr = xpath.compile("//Jugador[demarcacion='Delantero']/nombre/node()");
+        result = expr.evaluate(doc, XPathConstants.NODESET);
+        nodes = (NodeList) result;
+        for (int i = 0; i < nodes.getLength(); i++) {
+            System.out.println("Delanteros"+nodes.item(i).getNodeValue());
         }
 
         // obtener los jugadores por dni
-        expr = xpath.compile("//Jugador[demarcacion='Delantero']/nombre/node()");
+        expr = xpath.compile("//Jugador[@dni='44686144L']/nombre/text()");
         result = expr.evaluate(doc, XPathConstants.NODESET);
         nodes = (NodeList) result;
         for (int i = 0; i < nodes.getLength(); i++) {
