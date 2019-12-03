@@ -12,7 +12,8 @@ import java.io.IOException;
 
 public class XpathUtil {
 
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
+    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException,
+            XPathExpressionException {
 
         //Build DOM
 

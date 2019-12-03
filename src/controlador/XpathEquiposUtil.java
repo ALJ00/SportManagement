@@ -24,7 +24,6 @@ public class XpathEquiposUtil {
     private XPathExpression expr;
     private Object result;
 
-
     public XpathEquiposUtil() throws ParserConfigurationException, IOException, SAXException {
 
         //Build DOM
@@ -61,11 +60,12 @@ public class XpathEquiposUtil {
         ArrayList<Equipo> equipos = new ArrayList<>();
 
         // obtener los equipos por codigo
-        XPathExpression expr = xpath.compile("//Equipo[@codigoequipo=" + "'" + codigo + "'" + "]/nombre/text()");
+        XPathExpression expr = xpath.compile("//Equipo[@codigoequipo="+"'"+codigo+"'"+"]/nombre/text()");
         Object result = expr.evaluate(doc, XPathConstants.NODESET);
         NodeList nodes = (NodeList) result;
 
         for (int i = 0; i < nodes.getLength(); i++) {
+            System.out.println("Mas de 1000"+nodes.item(i).getNodeValue());
             Node node = nodes.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) node;
@@ -155,8 +155,6 @@ public class XpathEquiposUtil {
 
     public static void main(String[] args) {
         ArrayList<Equipo> equipos = new ArrayList<>();
-
-        
     }
 
 

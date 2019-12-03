@@ -1,6 +1,7 @@
 package vista;
 
 import controlador.ConsultaDAO;
+import controlador.XpathEquiposUtil;
 import modelo.Equipo;
 import modelo.Jugador;
 import modelo.ModeloTablaEquipos;
@@ -12,11 +13,13 @@ import resources.CreadorColeccionJugador;
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.xpath.XPathExpressionException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AppWindow {
     private JPanel contenedorPrincipal;
@@ -66,7 +69,7 @@ public class AppWindow {
     private JButton listarEquiposButton;
     private JButton eliminarButtonEquipos;
     private JButton actualizarButtonEquipos;
-    private JRadioButton equiposPorCódigoRadioButton;
+    private JRadioButton equiposPorCodigoRadioButton;
     private JRadioButton equiposPorNombreRadioButton;
     private JRadioButton equiposPorCategoríaRadioButton;
     private JButton buttonBuscAvanEquip;
@@ -512,6 +515,52 @@ public class AppWindow {
                     }
 
                 }
+            }
+        });
+        buttonBusqAvanzJugador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+
+            }
+        });
+        buttonBuscAvanEquip.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String cod = textFieldCodEq.getText();
+
+                if(!equiposPorCodigoRadioButton.isSelected() || !cod.equals("")){
+
+                    try {
+                        XpathEquiposUtil xpathEquiposUtil = new XpathEquiposUtil();
+
+                        ArrayList<Equipo> equipos = xpathEquiposUtil.getEquiposPorCodigo(cod);
+
+                        modeloTablaEquipos = new ModeloTablaEquipos(equipos);
+                        tabalEquipos.setModel(modeloTablaEquipos);
+
+                        textAreaEquipos.setText("");
+
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (XPathExpressionException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                }else{
+
+                    JOptionPane.showMessageDialog(null,"Error, seleccione el radioButton correspondiente" +
+                            "e inserte el dni a buscar");
+
+                }
+
             }
         });
     }
