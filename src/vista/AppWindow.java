@@ -531,17 +531,22 @@ public class AppWindow {
 
                 String cod = textFieldCodEq.getText();
 
-                if(!equiposPorCodigoRadioButton.isSelected() || !cod.equals("")){
+                if(equiposPorCodigoRadioButton.isSelected() && !cod.equals("")){
 
                     try {
                         XpathEquiposUtil xpathEquiposUtil = new XpathEquiposUtil();
 
-                        ArrayList<Equipo> equipos = xpathEquiposUtil.getEquiposPorCodigo(cod);
-
-                        modeloTablaEquipos = new ModeloTablaEquipos(equipos);
-                        tabalEquipos.setModel(modeloTablaEquipos);
+                        ArrayList<String> equipos = xpathEquiposUtil.getEquiposPorCodigo(cod);
 
                         textAreaEquipos.setText("");
+
+                        for (String eq:equipos
+                        ) {
+
+                            textAreaEquipos.setLineWrap(true);
+                            textAreaEquipos.append(eq);
+                        }
+
 
                     } catch (ParserConfigurationException ex) {
                         ex.printStackTrace();

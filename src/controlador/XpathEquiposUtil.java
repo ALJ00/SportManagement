@@ -55,9 +55,9 @@ public class XpathEquiposUtil {
 
     }
 
-    public ArrayList<Equipo> getEquiposPorCodigo(String codigo) throws XPathExpressionException {
+    public ArrayList<String> getEquiposPorCodigo(String codigo) throws XPathExpressionException {
 
-        ArrayList<Equipo> equipos = new ArrayList<>();
+        ArrayList<String> equipos = new ArrayList<>();
 
         // obtener los equipos por codigo
         XPathExpression expr = xpath.compile("//Equipo[@codigoequipo="+"'"+codigo+"'"+"]/nombre/text()");
@@ -65,12 +65,7 @@ public class XpathEquiposUtil {
         NodeList nodes = (NodeList) result;
 
         for (int i = 0; i < nodes.getLength(); i++) {
-            System.out.println("Mas de 1000"+nodes.item(i).getNodeValue());
-            Node node = nodes.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) node;
-                equipos.add(configurarObjetoEquipo(eElement));
-            }
+            equipos.add(nodes.item(i).getNodeValue());
         }
         return equipos;
     }
