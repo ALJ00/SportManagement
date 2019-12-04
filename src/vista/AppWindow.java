@@ -767,11 +767,61 @@ public class AppWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                Equipo equipo1 = new Equipo("C","ContinentalA","Pablo",
+                        "Continental","Mendizorroza");
+
+                Equipo equipo2 = new Equipo("A","AmateurA","Gaizka",
+                        "Amateur","Betoño");
+
+
+
+                try {
+                    CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo1);
+                    CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo2);
+
+
+                    JOptionPane.showMessageDialog(null, "Creada la colección equipos.xml, cargue el " +
+                            "documento en Exits BD y empiece a operar con el resto de utilidades de la aplicación.");
+
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                } catch (TransformerException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                }
+
             }
         });
         buttonAutomaticJug.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                Jugador jugador1 = new Jugador("12345678L","A","Pedro","Pérez",
+                        "12345678","01/01/1979","Delantero","1000");
+
+                Jugador jugador2 = new Jugador("87654321XL","C","Oscar","García",
+                        "660058534","01/01/1978","Portero","1200");
+
+
+                try {
+                    CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador1);
+                    CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador2);
+
+                    JOptionPane.showMessageDialog(null, "Creada la colección jugadores.xml, cargue el " +
+                            "documento en Exits BD y empiece a operar con el resto de utilidades de la aplicación.");
+
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                } catch (TransformerException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                }
 
             }
         });
