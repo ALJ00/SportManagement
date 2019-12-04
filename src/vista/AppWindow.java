@@ -783,6 +783,8 @@ public class AppWindow {
                     JOptionPane.showMessageDialog(null, "Creada la colección equipos.xml, cargue el " +
                             "documento en Exits BD y empiece a operar con el resto de utilidades de la aplicación.");
 
+
+
                 } catch (ParserConfigurationException ex) {
                     ex.printStackTrace();
                 } catch (TransformerException ex) {
@@ -793,11 +795,15 @@ public class AppWindow {
                     ex.printStackTrace();
                 }
 
+                buttonAutomaticEquipo.setEnabled(false);
+
             }
         });
         buttonAutomaticJug.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
 
                 Jugador jugador1 = new Jugador("12345678L","A","Pedro","Pérez",
                         "12345678","01/01/1979","Delantero","1000");
@@ -813,6 +819,8 @@ public class AppWindow {
                     JOptionPane.showMessageDialog(null, "Creada la colección jugadores.xml, cargue el " +
                             "documento en Exits BD y empiece a operar con el resto de utilidades de la aplicación.");
 
+
+
                 } catch (ParserConfigurationException ex) {
                     ex.printStackTrace();
                 } catch (TransformerException ex) {
@@ -822,6 +830,8 @@ public class AppWindow {
                 } catch (SAXException ex) {
                     ex.printStackTrace();
                 }
+
+                buttonAutomaticJug.setEnabled(false);
 
             }
         });
