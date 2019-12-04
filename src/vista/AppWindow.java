@@ -530,6 +530,10 @@ public class AppWindow {
             public void actionPerformed(ActionEvent e) {
 
                 String cod = textFieldCodEq.getText();
+                String nombre = textFieldNombreEquip.getText();
+                String entrenador = textFieldEntrenEquip.getText();
+                String categoria = textFieldCategEquip.getText();
+                String campo = textFieldCampoEntreEquip.getText();
 
                 if(equiposPorCodigoRadioButton.isSelected() && !cod.equals("")){
 
@@ -559,15 +563,71 @@ public class AppWindow {
                     }
 
 
-                }else{
+                }else if(equiposPorNombreRadioButton.isSelected() && !nombre.equals("")){
 
-                    JOptionPane.showMessageDialog(null,"Error, seleccione el radioButton correspondiente" +
-                            "e inserte el dni a buscar");
+                    try {
+                        XpathEquiposUtil xpathEquiposUtil = new XpathEquiposUtil();
+
+                        ArrayList<String> equipos = xpathEquiposUtil.getEquiposPorNombre(nombre);
+
+                        textAreaEquipos.setText("");
+
+                        for (String eq:equipos
+                        ) {
+
+                            textAreaEquipos.setLineWrap(true);
+                            textAreaEquipos.append(eq);
+                        }
+
+
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (XPathExpressionException ex) {
+                        ex.printStackTrace();
+                    }
+
+                }else if(equiposPorCategoríaRadioButton.isSelected() && !categoria.equals("")){
+
+                    try {
+                        XpathEquiposUtil xpathEquiposUtil = new XpathEquiposUtil();
+
+                        ArrayList<String> equipos = xpathEquiposUtil.getEquiposPorCategoria(categoria);
+
+                        textAreaEquipos.setText("");
+
+                        for (String eq:equipos
+                        ) {
+
+                            textAreaEquipos.setLineWrap(true);
+                            textAreaEquipos.append(eq+"\n");
+
+                        }
+
+
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (XPathExpressionException ex) {
+                        ex.printStackTrace();
+                    }
+
+                }else {
+
+                    JOptionPane.showMessageDialog(null,"Error, seleccione el radiobutton correspondiente e " +
+                            "introduzca el campo a buscar");
 
                 }
 
             }
         });
+
     }
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {

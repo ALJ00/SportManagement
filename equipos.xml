@@ -1,1 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Equipos><Equipo codigoequipo="A"><nombre>AmateurA</nombre><entrenador>Jose</entrenador><categoria>Amateur</categoria><campoentrenamiento>Betoño</campoentrenamiento></Equipo><Equipo codigoequipo="A1"><nombre>AmateurB</nombre><entrenador>Gorka</entrenador><categoria>Amateur</categoria><campoentrenamiento>Olarambe</campoentrenamiento></Equipo><Equipo codigoequipo="I"><nombre>Internacional</nombre><entrenador>Sachi</entrenador><categoria>Internacional</categoria><campoentrenamiento>Mendizorroza</campoentrenamiento></Equipo><Equipo codigoequipo="C"><nombre>Continental</nombre><entrenador>Pierre</entrenador><categoria>Continental</categoria><campoentrenamiento>San Mamés</campoentrenamiento></Equipo></Equipos>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Equipos>
+    <Equipo codigoequipo="A">
+        <nombre>AmateurA</nombre>
+        <entrenador>Jose</entrenador>
+        <categoria>Amateur</categoria>
+        <campoentrenamiento>Betoño</campoentrenamiento>
+    </Equipo>
+    <Equipo codigoequipo="A1">
+        <nombre>AmateurB</nombre>
+        <entrenador>Gorka</entrenador>
+        <categoria>Amateur</categoria>
+        <campoentrenamiento>Olarambe</campoentrenamiento>
+    </Equipo>
+    <Equipo codigoequipo="I">
+        <nombre>Internacional</nombre>
+        <entrenador>Sachi</entrenador>
+        <categoria>Internacional</categoria>
+        <campoentrenamiento>Mendizorroza</campoentrenamiento>
+    </Equipo>
+    <Equipo codigoequipo="C">
+        <nombre>Continental</nombre>
+        <entrenador>Pierre</entrenador>
+        <categoria>Continental</categoria>
+        <campoentrenamiento>San Mamés</campoentrenamiento>
+    </Equipo>
+</Equipos>

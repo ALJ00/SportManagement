@@ -3,7 +3,6 @@ package controlador;
 import modelo.Equipo;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -70,25 +69,18 @@ public class XpathEquiposUtil {
         return equipos;
     }
 
-    public ArrayList<Equipo> getEquiposPorNombre(String nombre) throws XPathExpressionException {
-        ArrayList<Equipo> equipos = new ArrayList<>();
+    public ArrayList<String> getEquiposPorNombre(String nombre) throws XPathExpressionException {
+        ArrayList<String> equipos = new ArrayList<>();
 
         // obtener los equipos por nombre
-        XPathExpression expr = xpath.compile("//Equipo[nombre=" + "'" + nombre + "'" + "]/nombre/node()");
+        XPathExpression expr = xpath.compile("//Equipo[nombre=" + "'" + nombre + "'" + "]/campoentrenamiento/node()");
         Object result = expr.evaluate(doc, XPathConstants.NODESET);
         NodeList nodes = (NodeList) result;
 
         for (int i = 0; i < nodes.getLength(); i++) {
-            Node node = nodes.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) node;
-
-                equipos.add(configurarObjetoEquipo(eElement));
-
-
-            }
-
+            equipos.add(nodes.item(i).getNodeValue());
         }
+
 
 
         return equipos;
@@ -96,8 +88,8 @@ public class XpathEquiposUtil {
 
     }
 
-    public ArrayList<Equipo> getEquiposPorCategoria(String categoria) throws XPathExpressionException {
-        ArrayList<Equipo> equipos = new ArrayList<>();
+    public ArrayList<String> getEquiposPorCategoria(String categoria) throws XPathExpressionException {
+        ArrayList<String> equipos = new ArrayList<>();
 
         // obtener los equipos por nombre
         XPathExpression expr = xpath.compile("//Equipo[categoria=" + "'" + categoria + "'" + "]/nombre/node()");
@@ -105,15 +97,7 @@ public class XpathEquiposUtil {
         NodeList nodes = (NodeList) result;
 
         for (int i = 0; i < nodes.getLength(); i++) {
-            Node node = nodes.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) node;
-
-                equipos.add(configurarObjetoEquipo(eElement));
-
-
-            }
-
+            equipos.add(nodes.item(i).getNodeValue());
         }
 
 
@@ -122,8 +106,8 @@ public class XpathEquiposUtil {
 
     }
 
-    public ArrayList<Equipo> getEquiposPorCampoEntreno(String campo) throws XPathExpressionException {
-        ArrayList<Equipo> equipos = new ArrayList<>();
+    public ArrayList<String> getEquiposPorCampoEntreno(String campo) throws XPathExpressionException {
+        ArrayList<String> equipos = new ArrayList<>();
 
         // obtener los equipos por nombre
         XPathExpression expr = xpath.compile("//Equipo[campoentrenamiento=" + "'" + campo + "'" + "]/nombre/node()");
@@ -131,15 +115,7 @@ public class XpathEquiposUtil {
         NodeList nodes = (NodeList) result;
 
         for (int i = 0; i < nodes.getLength(); i++) {
-            Node node = nodes.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) node;
-
-                equipos.add(configurarObjetoEquipo(eElement));
-
-
-            }
-
+            equipos.add(nodes.item(i).getNodeValue());
         }
 
 
