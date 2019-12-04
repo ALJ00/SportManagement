@@ -75,9 +75,8 @@ public class AppWindow {
     private JButton buttonBuscAvanEquip;
     private JRadioButton jugadorPorDniRadioButton;
     private JRadioButton jugadorPorNombreRadioButton;
-    private JRadioButton salario1000RadioButton;
+    private JRadioButton salarioXRadioButton;
     private JRadioButton jugadorPorDemarcaciónRadioButton;
-    private JRadioButton jugadoresPorNombreEquipoRadioButton;
     private JButton buttonBusqAvanzJugador;
     private static JFrame frame;
     private ModeloTablaJugadores modeloTablaJugadores = new ModeloTablaJugadores();
@@ -520,6 +519,39 @@ public class AppWindow {
         buttonBusqAvanzJugador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                String dni = textFieldDniJug.getText();
+                String nombe = textFieldNombreJug.getText();
+                String salario = textFieldSalarJug.getText();
+                String demarcacion = textFieldDemarcJug.getText();
+
+                if(jugadorPorDniRadioButton.isSelected() && !dni.equals("")){
+
+
+
+
+                }else if(jugadorPorNombreRadioButton.isSelected() && !nombe.equals("")){
+
+
+
+                }else if(salarioXRadioButton.isSelected() && !salario.equals("")){
+
+
+
+
+                }else if(jugadorPorDemarcaciónRadioButton.isSelected() && !demarcacion.equals("")){
+
+
+
+
+                }else{
+
+
+                    JOptionPane.showMessageDialog(null, "Error, seleccione el radioButton correspondiente y " +
+                            "rellene el campo correcto");
+                }
+
+
 
 
 
