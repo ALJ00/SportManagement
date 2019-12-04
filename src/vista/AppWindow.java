@@ -2,6 +2,7 @@ package vista;
 
 import controlador.ConsultaDAO;
 import controlador.XpathEquiposUtil;
+import controlador.XpathUtil;
 import modelo.Equipo;
 import modelo.Jugador;
 import modelo.ModeloTablaEquipos;
@@ -74,7 +75,7 @@ public class AppWindow {
     private JRadioButton equiposPorCategoríaRadioButton;
     private JButton buttonBuscAvanEquip;
     private JRadioButton jugadorPorDniRadioButton;
-    private JRadioButton jugadorPorNombreRadioButton;
+    private JRadioButton jugadorPorCodigoRadioButton;
     private JRadioButton salarioXRadioButton;
     private JRadioButton jugadorPorDemarcaciónRadioButton;
     private JButton buttonBusqAvanzJugador;
@@ -524,22 +525,124 @@ public class AppWindow {
                 String nombe = textFieldNombreJug.getText();
                 String salario = textFieldSalarJug.getText();
                 String demarcacion = textFieldDemarcJug.getText();
+                String codigo = textFieldCodEquJug.getText();
 
                 if(jugadorPorDniRadioButton.isSelected() && !dni.equals("")){
 
+                    try {
+                        XpathUtil xpathUtil = new XpathUtil();
+
+                        ArrayList<String> jugadores = xpathUtil.getNombreJugadoresPorDni(dni);
+
+                        textArea.setText("");
+
+                        for (String eq:jugadores
+                        ) {
+
+                            textArea.setLineWrap(true);
+                            textArea.append(eq+"\n");
+                        }
+
+
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (XPathExpressionException ex) {
+                        ex.printStackTrace();
+                    }
 
 
 
-                }else if(jugadorPorNombreRadioButton.isSelected() && !nombe.equals("")){
+
+                }else if(jugadorPorCodigoRadioButton.isSelected() && !codigo.equals("")){
+
+                    try {
+                        XpathUtil xpathUtil = new XpathUtil();
+
+                        ArrayList<String> jugadores = xpathUtil.getJugadoresPorCodigo(codigo);
+
+                        textArea.setText("");
+
+                        for (String eq:jugadores
+                        ) {
+
+                            textArea.setLineWrap(true);
+                            textArea.append(eq+"\n");
+                        }
+
+
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (XPathExpressionException ex) {
+                        ex.printStackTrace();
+                    }
+
 
 
 
                 }else if(salarioXRadioButton.isSelected() && !salario.equals("")){
 
+                    try {
+                        XpathUtil xpathUtil = new XpathUtil();
+
+                        ArrayList<String> jugadores = xpathUtil.getNombreJugadoresConSalarioMayorDe(salario);
+
+                        textArea.setText("");
+
+                        for (String eq:jugadores
+                        ) {
+
+                            textArea.setLineWrap(true);
+                            textArea.append(eq+"\n");
+                        }
+
+
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (XPathExpressionException ex) {
+                        ex.printStackTrace();
+                    }
+
 
 
 
                 }else if(jugadorPorDemarcaciónRadioButton.isSelected() && !demarcacion.equals("")){
+
+                    try {
+                        XpathUtil xpathUtil = new XpathUtil();
+
+                        ArrayList<String> jugadores = xpathUtil.getNombreJugadoresPorDemarcacion(demarcacion);
+
+                        textArea.setText("");
+
+                        for (String eq:jugadores
+                        ) {
+
+                            textArea.setLineWrap(true);
+                            textArea.append(eq+"\n");
+                        }
+
+
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    } catch (XPathExpressionException ex) {
+                        ex.printStackTrace();
+                    }
 
 
 
@@ -580,7 +683,7 @@ public class AppWindow {
                         ) {
 
                             textAreaEquipos.setLineWrap(true);
-                            textAreaEquipos.append(eq);
+                            textAreaEquipos.append(eq+"\n");
                         }
 
 
@@ -608,7 +711,7 @@ public class AppWindow {
                         ) {
 
                             textAreaEquipos.setLineWrap(true);
-                            textAreaEquipos.append(eq);
+                            textAreaEquipos.append(eq+"\n");
                         }
 
 

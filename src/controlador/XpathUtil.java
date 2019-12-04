@@ -108,6 +108,23 @@ public class XpathUtil {
 
     }
 
+    public ArrayList<String>getJugadoresPorCodigo(String codigo) throws XPathExpressionException {
+
+        ArrayList<String> jugadores = new ArrayList<>();
+
+        // obtener los jugadores por dni
+        XPathExpression expr = xpath.compile("//Jugador[@codigoequipo="+"'"+codigo+"'"+"]/nombre/text()");
+        Object result = expr.evaluate(doc, XPathConstants.NODESET);
+        NodeList nodes = (NodeList) result;
+
+        for (int i = 0; i < nodes.getLength(); i++) {
+            jugadores.add(nodes.item(i).getNodeValue());
+        }
+
+        return jugadores;
+
+    }
+
 
 
 }

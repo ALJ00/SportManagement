@@ -545,12 +545,12 @@
                       <text value="Jugador por dni"/>
                     </properties>
                   </component>
-                  <component id="c1ccc" class="javax.swing.JRadioButton" binding="jugadorPorNombreRadioButton" default-binding="true">
+                  <component id="c1ccc" class="javax.swing.JRadioButton" binding="jugadorPorCodigoRadioButton">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Jugador por nombre"/>
+                      <text value="Jugador codigo de equipo"/>
                     </properties>
                   </component>
                   <component id="5458e" class="javax.swing.JRadioButton" binding="salarioXRadioButton" default-binding="true">
