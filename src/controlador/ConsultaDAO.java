@@ -68,8 +68,8 @@ public class ConsultaDAO {
         if (conectar() != null) {
             try {
 
-                //ResourceSet result = servicio.query("for $de in doc('file:///C:/Users/usuario/Desktop/test.xml')
-                // /departamentos/DEP_ROW return $de");
+                //*************** cambiar la ruta aqui ***************************
+
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 ResourceSet result = servicio.query("for $eq in doc('file:///C:/Users/armas/Desktop/SportManagement/equipos.xml') /Equipos/Equipo return $eq");
@@ -325,8 +325,7 @@ public class ConsultaDAO {
         if (conectar() != null) {
             try {
 
-                //ResourceSet result = servicio.query("for $de in doc('file:///C:/Users/usuario/Desktop/test.xml')
-                // /departamentos/DEP_ROW return $de");
+               // ********* cambia la ruta aqui *****************************
 
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");

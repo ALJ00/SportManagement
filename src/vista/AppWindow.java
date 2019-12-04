@@ -763,6 +763,18 @@ public class AppWindow {
             }
         });
 
+        buttonAutomaticEquipo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        buttonAutomaticJug.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
@@ -776,7 +788,8 @@ public class AppWindow {
 
     }
 
-    public boolean comprobarTextFieldsJugador(String d, String cod, String n, String ap, String tfno, String fnac, String demarc, String sala) {
+    public boolean comprobarTextFieldsJugador(String d, String cod, String n, String ap, String tfno, String fnac,
+                                              String demarc, String sala) {
 
         boolean respuesta = false;
 
