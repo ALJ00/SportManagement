@@ -15,6 +15,8 @@ de DOM, XPath y Xquery.
 
 Se ha establecido una estructuración de proyecto tratando de seguir la arquitectura MVC 
 
+***MVC***
+
 ![](imagenes/estructura.PNG)
 
 Por un lado está el paquete vista que es donde se aloja la clase AppWindow que representa la interfaz gráfica de usuario, 
@@ -23,7 +25,12 @@ donde se crean las clases Equipo y Jugador, asi como, las clases Modelo para el 
 por último el paquete controlador donde se encuentran las clases que representan las consultas utilizando DOM, XQuery y 
 XPath.
 
+***XQuery***
+
 ![](imagenes/xquery.PNG)
+
+
+***XPath***
 
 ![](imagenes/xpath.PNG)
 
