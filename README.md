@@ -42,4 +42,26 @@ de JavaSwing que se aprecian en la imagen.
 
 ![](imagenes/interfaz2.PNG)
 
+La aplicación partirá sin nigún dato, es decir, sin ningún jugador ni equipo por lo que tendrá dos opciones de crear los
+datos que estarán reflejados en las colecciones:
+
+    - Mediante el botón automático que creará dos elementos correspondiente a la colección con la que se interactúa.
+    - O bien rellenando los textfields correspondientes y dando al botón de alta.
+    
+Realizando esto las colecciones de la aplicación se irán llenando de datos y estos se podrán ir modificando interactuando 
+diractamente con la tabla, habrá que selccionar una fila de la tabla correspondiente y editarla en el el caso del botón 
+actualizar para realizar el resto de operaciones de los botones.
+
+En el caso de listar simplemente se verán las colecciones tanto en el TextArea y Tabla correspondiente.
+
+Se habilita también un espacio para consultas avanzadas donde habrá que seleccionar el radioButton correspondiente y rellenar
+el texfield necesario para que el botón buscar funcione correctamente. Hecho esto se mostrará en el TextArea la información
+solicitada.
+
+
+### Vídeo tutorial
+
+[Ver vídeo tutorial]()
+
+
 
