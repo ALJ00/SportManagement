@@ -72,7 +72,8 @@ public class ConsultaDAO {
 
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
-                ResourceSet result = servicio.query("for $eq in doc('file:///C:/Users/armas/Desktop/SportManagement/equipos.xml') /Equipos/Equipo return $eq");
+                ResourceSet result = servicio.query("for $eq in doc('file:///C:/Users/armas/Desktop/SportManagement" +
+                        "/equipos.xml') /Equipos/Equipo return $eq");
 
                 // recorrer los datos del recurso.
                 ResourceIterator i;
@@ -165,17 +166,15 @@ public class ConsultaDAO {
     //insertar nuevo equipo
     public static void insertarNuevoEquipo(Equipo e, JTextArea textArea) {
 
-        String nuevoequipo = "<Equipo codigoequipo=" +"'"+ e.getCodigoEquipo()+"'" + " ><nombre>" + e.getNombre() + "</nombre><entrenador>" + e.getEntrenador()
-                + "</entrenador><categoria>" + e.getCategoria() + "</categoria><campoentrenamiento>" + e.getCampoEntrenamiento() + "</campoentrenamiento></Equipo>";
+        String nuevoequipo = "<Equipo codigoequipo=" +"'"+ e.getCodigoEquipo()+"'" + " ><nombre>" + e.getNombre() +
+                "</nombre><entrenador>" + e.getEntrenador()
+                + "</entrenador><categoria>" + e.getCategoria() + "</categoria><campoentrenamiento>" +
+                e.getCampoEntrenamiento() + "</campoentrenamiento></Equipo>";
 
         System.out.println(nuevoequipo);
         if (conectar() != null) {
             try {
 
-                //for $de in
-                //doc('file:///D:/XML/pruebaxquery/NUEVOS_DEP.xml')
-                ///NUEVOS_DEP/DEP_ROW
-                //return update insert $de into /departamentos
 
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 System.out.printf("Inserto: %s \n", e.getNombre());
@@ -186,9 +185,9 @@ public class ConsultaDAO {
                 textArea.append(formateado);
                 col.close(); //borramos
 
-                System.out.println("Dep insertado.");
+                System.out.println("equipo insertado.");
             } catch (Exception ex) {
-                System.out.println("Error al insertar empleado.");
+                System.out.println("Error al insertar equipo.");
                 ex.printStackTrace();
             }
         } else {
@@ -504,7 +503,7 @@ public class ConsultaDAO {
 
     }
 
-    // comprobar si existe un equipo con codigo x
+    // comprobar si existe un jugador
     public static boolean comprobarSiExisteJugador(Jugador jugador) throws ParserConfigurationException, IOException, SAXException {
 
         boolean respuesta = false;

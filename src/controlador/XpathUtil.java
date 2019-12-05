@@ -70,8 +70,6 @@ public class XpathUtil {
 
         return juagdores;
 
-
-
     }
 
     public ArrayList<String>getNombreJugadoresPorDemarcacion(String demarcacion) throws XPathExpressionException {
