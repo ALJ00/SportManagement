@@ -13,3 +13,6 @@ de DOM, XPath y Xquery.
 
 ### Estructuración del proyecto
 
+Se ha establecido una estructuración de proyecto tratando de seguir la arquitectura MVC 
+
+![](imagenes/estructura.PNG)
