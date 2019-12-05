@@ -40,7 +40,6 @@ XPath.
 La aplicación se muestra mediante la siguiente interfaz de usuario donde el usuario interactua mediante los componentes
 de JavaSwing que se aprecian en la imagen.
 
-![](imagenes/interfaz.PNG)
 
 
 
