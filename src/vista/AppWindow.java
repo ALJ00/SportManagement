@@ -155,7 +155,7 @@ public class AppWindow {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
 
-                    JOptionPane.showMessageDialog(null, "Insertado nuevo jugador");
+
 
                 } else {
 
@@ -773,29 +773,39 @@ public class AppWindow {
                 Equipo equipo2 = new Equipo("A","AmateurA","Gaizka",
                         "Amateur","Betoño");
 
+                File file = new File("equipos.xml");
+
+                 if(file.exists()){
+
+                     buttonAutomaticEquipo.setEnabled(false);
+
+                 }else{
+
+                     try {
+                         CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo1);
+                         CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo2);
 
 
-                try {
-                    CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo1);
-                    CreadorColeccionEquipo.añadirEquipoAlaColeccion(equipo2);
-
-
-                    JOptionPane.showMessageDialog(null, "Creada la colección equipos.xml, cargue el " +
-                            "documento en Exits BD y empiece a operar con el resto de utilidades de la aplicación.");
+                         JOptionPane.showMessageDialog(null, "Creada la colección equipos.xml, cargue el " +
+                                 "documento en Exits BD y empiece a operar con el resto de utilidades de la aplicación.");
 
 
 
-                } catch (ParserConfigurationException ex) {
-                    ex.printStackTrace();
-                } catch (TransformerException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (SAXException ex) {
-                    ex.printStackTrace();
-                }
+                     } catch (ParserConfigurationException ex) {
+                         ex.printStackTrace();
+                     } catch (TransformerException ex) {
+                         ex.printStackTrace();
+                     } catch (IOException ex) {
+                         ex.printStackTrace();
+                     } catch (SAXException ex) {
+                         ex.printStackTrace();
+                     }
 
-                buttonAutomaticEquipo.setEnabled(false);
+                     buttonAutomaticEquipo.setEnabled(false);
+
+
+                 }
+
 
             }
         });
@@ -811,27 +821,36 @@ public class AppWindow {
                 Jugador jugador2 = new Jugador("87654321XL","C","Oscar","García",
                         "660058534","01/01/1978","Portero","1200");
 
+                File file = new File("jugadores.xml");
 
-                try {
-                    CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador1);
-                    CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador2);
+                if(file.exists()){
 
-                    JOptionPane.showMessageDialog(null, "Creada la colección jugadores.xml, cargue el " +
-                            "documento en Exits BD y empiece a operar con el resto de utilidades de la aplicación.");
+                    buttonAutomaticJug.setEnabled(false);
+
+                }else{
+
+                    try {
+                        CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador1);
+                        CreadorColeccionJugador.añadirJugadorAlaColeccion(jugador2);
+
+                        JOptionPane.showMessageDialog(null, "Creada la colección jugadores.xml, cargue el " +
+                                "documento en Exits BD y empiece a operar con el resto de utilidades de la aplicación.");
 
 
 
-                } catch (ParserConfigurationException ex) {
-                    ex.printStackTrace();
-                } catch (TransformerException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (SAXException ex) {
-                    ex.printStackTrace();
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (TransformerException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    buttonAutomaticJug.setEnabled(false);
                 }
 
-                buttonAutomaticJug.setEnabled(false);
 
             }
         });
