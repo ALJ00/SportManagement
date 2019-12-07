@@ -1,4 +1,4 @@
-![](imagenes/trofeo.png)
+![](imagenes/trofeo2.png)
 
 # Sport Management
 
