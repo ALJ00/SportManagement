@@ -69,7 +69,7 @@ solicitada.
 
 ### Vídeo tutorial
 
-[Ver vídeo tutorial]()
+[Ver vídeo tutorial](https://youtu.be/oyjlkzDM72g)
 
 
 
