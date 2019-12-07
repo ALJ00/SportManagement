@@ -63,7 +63,9 @@ solicitada.
 ### Referencias
 
 [XPath](https://www.w3.org/TR/1999/REC-xpath-19991116/)
+
 [XQuery](https://www.w3.org/TR/xquery-31/)
+
 [DOM](https://docs.oracle.com/javase/tutorial/jaxp/dom/when.html)
 
 
