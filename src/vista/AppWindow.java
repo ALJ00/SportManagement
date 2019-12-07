@@ -863,6 +863,8 @@ public class AppWindow {
         frame.setResizable(true);
         frame.pack();
         frame.setLocationRelativeTo(null);
+        ImageIcon img = new ImageIcon("imagenes/trofeo.png");
+        frame.setIconImage(img.getImage());
         frame.setVisible(true);
 
     }

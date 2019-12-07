@@ -1,3 +1,5 @@
+![](imagenes/trofeo.png)
+
 # Sport Management
 
 Sport Management es una aplicación de gestión deportiva creada con el lenguaje de programación de Java, versión 1.8.0_231 y
