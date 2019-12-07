@@ -60,6 +60,12 @@ Se habilita también un espacio para consultas avanzadas donde habrá que selecc
 el texfield necesario para que el botón buscar funcione correctamente. Hecho esto se mostrará en el TextArea la información
 solicitada.
 
+### Referencias
+
+[XPath](https://www.w3.org/TR/1999/REC-xpath-19991116/)
+[XQuery](https://www.w3.org/TR/xquery-31/)
+[DOM](https://docs.oracle.com/javase/tutorial/jaxp/dom/when.html)
+
 
 ### Vídeo tutorial
 
